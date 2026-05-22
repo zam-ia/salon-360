@@ -1,14 +1,28 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
+  --background: #F8FAFC;
+  --foreground: #0F172A; /* Slate 900 */
+  --glow-pink: #D23369; /* Fucsia Quemado / Malva Eléctrico */
+  --glow-light-pink: #FFFFFF; /* Panel fondo claro */
+  --glow-gray: #E2E8F0; /* Slate 200 borders */
+  --glow-text-gray: #475569; /* Slate 600 text */
+  --glow-success: #10B981;
+  --glow-alert: #EF4444;
+  --glow-white: #FFFFFF;
+}
+
+.dark {
   --background: #121212;
   --foreground: #F8FAFC; /* Blanco Roto / Gris Claro para evitar fatiga */
-  --glow-pink: #D23369; /* Fucsia Quemado / Malva Eléctrico */
+  --glow-pink: #D23369;
   --glow-light-pink: #1A1A1A; /* Estructura Secundaria (30%) - Negro Antracita */
-  --glow-gray: #242424; /* Gris Bordes VIP */
-  --glow-text-gray: #94A3B8; /* Slate Gris Secundario */
-  --glow-success: #10B981; /* Verde Ingresos / Ganancias (Indicador universal) */
-  --glow-alert: #EF4444; /* Rojo Egresos / Pérdidas (Indicador universal) */
+  --glow-gray: #242424;
+  --glow-text-gray: #94A3B8;
+  --glow-success: #10B981;
+  --glow-alert: #EF4444;
   --glow-white: #1A1A1A;
 }
 
@@ -31,6 +45,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-poppins), sans-serif;
   letter-spacing: -0.01em;
+  transition: background-color 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -130,5 +145,68 @@ h1, h2, h3, h4, h5, h6 {
 .card-glow-premium:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================================
+   ESTILOS DE ICONOS GLASSMORPHIC 3D (Ref. Imagen)
+   ======================================================== */
+.glass-icon-container {
+  position: relative;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.glass-icon-bg {
+  position: absolute;
+  inset: 0.125rem;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #D23369, #7000FF);
+  opacity: 0.8;
+  filter: blur(1px);
+  transform: translate(-3px, 3px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-icon-front {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #D23369;
+  transform: translate(0px, 0px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dark .glass-icon-front {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  color: #FFFFFF;
+}
+
+.group:hover .glass-icon-bg {
+  transform: translate(0px, 0px);
+  opacity: 0.9;
+}
+
+.group:hover .glass-icon-front {
+  transform: translate(3px, -3px);
+  background: rgba(255, 255, 255, 0.45);
+  border-color: rgba(255, 255, 255, 0.65);
+}
+
+.dark .group:hover .glass-icon-front {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 

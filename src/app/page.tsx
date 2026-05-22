@@ -25,6 +25,7 @@ import { createClient } from "@/lib/supabase/client";
 import MetaPixel, { trackMetaEvent } from "@/components/analytics/MetaPixel";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -344,17 +345,7 @@ export default function LandingPage() {
 
         <div className="flex items-center gap-3">
           {/* Sun/Moon Theme Toggle Switch */}
-          <button 
-            onClick={toggleTheme}
-            className="p-2.5 rounded-xl hover:bg-slate-100 dark:hover:bg-[#1A1A1A] transition-all cursor-pointer border-none bg-transparent outline-none flex items-center justify-center hover:scale-105 active:scale-95"
-            title={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-          >
-            {isDarkMode ? (
-              <Sun size={18} className="text-[#D23369] drop-shadow-[0_0_8px_rgba(210,51,105,0.4)]" />
-            ) : (
-              <Moon size={18} className="text-slate-550 hover:text-slate-800" />
-            )}
-          </button>
+          <ThemeToggle />
 
           <Link 
             href="/login" 
@@ -619,8 +610,11 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Pilar 1 */}
             <div className="flex gap-4 group">
-              <div className="w-10 h-10 rounded-lg bg-[#D23369]/10 text-[#D23369] flex items-center justify-center shrink-0 border border-[#D23369]/20">
-                <Smartphone size={18} />
+              <div className="glass-icon-container">
+                <div className="glass-icon-bg" />
+                <div className="glass-icon-front">
+                  <Smartphone size={18} />
+                </div>
               </div>
               <div>
                 <h4 className="text-sm font-extrabold text-slate-800 dark:text-[#F8FAFC] mb-1.5 font-syne">WhatsApp Emisor Propio</h4>
@@ -632,8 +626,11 @@ export default function LandingPage() {
 
             {/* Pilar 2 */}
             <div className="flex gap-4 group">
-              <div className="w-10 h-10 rounded-lg bg-[#D23369]/10 text-[#D23369] flex items-center justify-center shrink-0 border border-[#D23369]/20">
-                <Sparkles size={18} />
+              <div className="glass-icon-container">
+                <div className="glass-icon-bg" />
+                <div className="glass-icon-front">
+                  <Sparkles size={18} />
+                </div>
               </div>
               <div>
                 <h4 className="text-sm font-extrabold text-slate-800 dark:text-[#F8FAFC] mb-1.5 font-syne">Personalización Cromática HSL</h4>
@@ -645,8 +642,11 @@ export default function LandingPage() {
 
             {/* Pilar 3 */}
             <div className="flex gap-4 group">
-              <div className="w-10 h-10 rounded-lg bg-[#D23369]/10 text-[#D23369] flex items-center justify-center shrink-0 border border-[#D23369]/20">
-                <Lock size={18} />
+              <div className="glass-icon-container">
+                <div className="glass-icon-bg" />
+                <div className="glass-icon-front">
+                  <Lock size={18} />
+                </div>
               </div>
               <div>
                 <h4 className="text-sm font-extrabold text-slate-800 dark:text-[#F8FAFC] mb-1.5 font-syne">Caja y Roles Blindados</h4>

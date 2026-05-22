@@ -1,30 +1,9 @@
 "use client";
 
-import { Bell, Search, UserCircle, Sun, Moon } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Bell, Search, UserCircle } from "lucide-react";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 export default function Topbar() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const isLight = document.documentElement.classList.contains("light");
-      setTheme(isLight ? "light" : "dark");
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === "dark" ? "light" : "dark";
-    setTheme(nextTheme);
-    if (typeof window !== "undefined") {
-      document.documentElement.classList.remove("light", "dark");
-      document.documentElement.classList.add(nextTheme);
-      localStorage.setItem("theme", nextTheme);
-      // Despachar evento para sincronizar otros componentes cliente (como el landing si está abierto)
-      window.dispatchEvent(new Event("themeChanged"));
-    }
-  };
-
   return (
     <header className="h-20 bg-white border-b border-gray-100 dark:bg-[#1A1A1A] dark:border-[#242424] px-8 flex items-center justify-between sticky top-0 z-10 transition-colors duration-200 font-sans">
       <div className="flex items-center gap-4 bg-gray-50 dark:bg-[#121212] px-4 py-2 rounded-full w-96 border border-transparent dark:border-[#242424] transition-colors duration-200">
@@ -38,17 +17,7 @@ export default function Topbar() {
 
       <div className="flex items-center gap-6">
         {/* Sun/Moon Theme Toggle Switch */}
-        <button 
-          onClick={toggleTheme}
-          className="p-2.5 rounded-xl hover:bg-gray-150 dark:hover:bg-[#242424] transition-all cursor-pointer border-none bg-transparent outline-none flex items-center justify-center hover:scale-105 active:scale-95"
-          title={theme === "dark" ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-        >
-          {theme === "dark" ? (
-            <Sun size={20} className="text-[#D23369] drop-shadow-[0_0_8px_rgba(210,51,105,0.4)]" />
-          ) : (
-            <Moon size={20} className="text-slate-500 hover:text-slate-800" />
-          )}
-        </button>
+        <ThemeToggle />
 
         <button className="relative text-gray-400 hover:text-pink-500 transition-colors">
           <Bell size={24} />
