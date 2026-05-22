@@ -15,9 +15,7 @@ import {
   ArrowUpRight,
   TrendingDown,
   Clock,
-  Scissors,
-  ChevronRight,
-  Check
+  MessageSquare
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { registrarLead } from "@/app/actions/leads";
@@ -50,38 +48,38 @@ export default function LandingPage() {
   const [vslSlide, setVslSlide] = useState(0);
   const [vslProgress, setVslProgress] = useState(0);
 
-  // Pasos de la presentación interactiva de la VSL (Dolor, Consecuencia, Solución, Resultado, CTA)
+  // Pasos de la presentación interactiva de la VSL
   const vslSlides = [
     {
       title: "1. Control de Finanzas Macro (Dashboard)",
       subtitle: "Visualiza la rentabilidad neta al instante sin sumas manuales.",
       desc: "GlowDesk unifica ingresos, egresos y comisiones de estilistas de forma automatizada. Mantén el control total de tu caja en un solo panel corporativo de alta gama.",
       badge: "Finanzas Clarificadas",
-      color: "from-cyan-500 to-blue-600",
+      color: "from-pink-500 to-rose-600",
       graphic: (
-        <div className="w-full h-full bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3 shadow-inner relative overflow-hidden select-none">
-          <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-            <span className="text-[10px] font-bold text-slate-400">DASHBOARD COMERCIAL</span>
-            <span className="px-2 py-0.5 rounded-full text-[8px] font-black bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">REAL-TIME</span>
+        <div className="w-full h-full bg-[#121212] border border-[#242424] rounded-2xl p-4 flex flex-col gap-3 shadow-inner relative overflow-hidden select-none">
+          <div className="flex justify-between items-center border-b border-[#242424] pb-2">
+            <span className="text-[9px] font-bold text-slate-400 font-syne">DASHBOARD COMERCIAL</span>
+            <span className="px-2 py-0.5 rounded-full text-[8px] font-black bg-[#D23369]/10 text-[#D23369] border border-[#D23369]/20">REAL-TIME</span>
           </div>
           <div className="grid grid-cols-2 gap-2.5">
-            <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <div className="p-3 bg-[#1A1A1A] rounded-xl border border-[#242424]">
               <span className="text-[8px] font-bold text-slate-500 block">INGRESOS NETOS</span>
-              <span className="text-sm font-black text-cyan-400">$12,480.00</span>
-              <span className="text-[7px] text-emerald-400 font-bold block mt-0.5">↑ +14.2% este mes</span>
+              <span className="text-xs font-black text-[#10B981]">$12,480.00</span>
+              <span className="text-[7px] text-[#10B981] font-bold block mt-0.5">↑ +14.2% este mes</span>
             </div>
-            <div className="p-3 bg-slate-950 rounded-xl border border-slate-800">
+            <div className="p-3 bg-[#1A1A1A] rounded-xl border border-[#242424]">
               <span className="text-[8px] font-bold text-slate-500 block">EGRESOS TOTALES</span>
-              <span className="text-sm font-black text-pink-400">$3,120.00</span>
-              <span className="text-[7px] text-slate-400 block mt-0.5">Insumos y servicios</span>
+              <span className="text-xs font-black text-[#EF4444]">$3,120.00</span>
+              <span className="text-[7px] text-slate-500 block mt-0.5">Insumos y servicios</span>
             </div>
           </div>
-          <div className="p-3 bg-cyan-950/20 border border-cyan-500/10 rounded-xl flex items-center justify-between">
+          <div className="p-3 bg-[#D23369]/5 border border-[#D23369]/10 rounded-xl flex items-center justify-between">
             <div>
               <span className="text-[8px] font-black text-slate-400">RENTABILIDAD REAL (EBITDA)</span>
-              <p className="text-[11px] text-slate-300 mt-0.5">Margen de ganancia neto del salón</p>
+              <p className="text-[10px] text-slate-500 mt-0.5">Margen de ganancia neto del salón</p>
             </div>
-            <span className="text-xs font-black text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-1 rounded-lg">75%</span>
+            <span className="text-[10px] font-black text-[#10B981] bg-[#10B981]/10 border border-[#10B981]/20 px-2 py-0.5 rounded">75%</span>
           </div>
         </div>
       )
@@ -93,28 +91,28 @@ export default function LandingPage() {
       badge: "WhatsApp Business API",
       color: "from-emerald-400 to-teal-600",
       graphic: (
-        <div className="w-full h-full bg-slate-900 border border-emerald-500/20 rounded-2xl p-4 flex flex-col gap-3 shadow-inner relative overflow-hidden select-none">
-          <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-            <span className="text-[10px] font-bold text-emerald-400 flex items-center gap-1">💬 SIMULADOR DE EMISOR</span>
-            <span className="text-[8px] text-slate-400">Línea: +51 987 654 321</span>
+        <div className="w-full h-full bg-[#121212] border border-[#242424] rounded-2xl p-4 flex flex-col gap-3 shadow-inner relative overflow-hidden select-none">
+          <div className="flex justify-between items-center border-b border-[#242424] pb-2">
+            <span className="text-[9px] font-bold text-[#10B981] flex items-center gap-1 font-syne">💬 SIMULADOR DE EMISOR</span>
+            <span className="text-[8px] text-slate-500">Línea: +51 987 654 321</span>
           </div>
           <div className="flex flex-col gap-2 max-w-[85%] self-end">
-            <div className="bg-emerald-600 text-white rounded-2xl rounded-tr-none p-3 shadow-md">
-              <p className="text-[10px] font-medium leading-relaxed">
-                ¡Hola Maria! Confirmamos tu cita para <span className="font-black">Balayage Completo</span> en <span className="font-black">Glow Spa</span> para el 24/05/2026. ¡Te esperamos!
+            <div className="bg-[#D23369] text-white rounded-2xl rounded-tr-none p-3 shadow-md">
+              <p className="text-[9px] font-medium leading-relaxed text-[#F8FAFC]">
+                ¡Hola Maria! Confirmamos tu cita para <span className="font-extrabold text-white">Balayage Completo</span> en <span className="font-extrabold text-white">Glow Spa</span> para el 24/05/2026. ¡Te esperamos!
               </p>
-              <div className="flex justify-end items-center gap-0.5 mt-1 text-[8px] text-emerald-100">
+              <div className="flex justify-end items-center gap-0.5 mt-1 text-[7px] text-pink-100">
                 <span>16:30</span>
                 <span>✓✓</span>
               </div>
             </div>
           </div>
-          <div className="p-2.5 bg-slate-950 border border-slate-800 rounded-xl flex items-center justify-between mt-auto">
-            <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-              <span className="text-[9px] font-bold text-slate-300">Conexión Meta API Activa</span>
+          <div className="p-2 bg-[#1A1A1A] border border-[#242424] rounded-xl flex items-center justify-between mt-auto">
+            <div className="flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#10B981] animate-pulse" />
+              <span className="text-[8px] font-bold text-slate-400">Conexión Meta API Activa</span>
             </div>
-            <span className="text-[8px] font-extrabold text-emerald-400 tracking-wider">ENTREGADO</span>
+            <span className="text-[8px] font-extrabold text-[#10B981] tracking-wider">ENTREGADO</span>
           </div>
         </div>
       )
@@ -126,30 +124,30 @@ export default function LandingPage() {
       badge: "Figma-Like Theming",
       color: "from-pink-500 to-purple-600",
       graphic: (
-        <div className="w-full h-full bg-slate-900 border border-pink-500/20 rounded-2xl p-4 flex flex-col gap-3 shadow-inner relative overflow-hidden select-none">
-          <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-            <span className="text-[10px] font-bold text-slate-400">PALETA CORPORATIVA</span>
+        <div className="w-full h-full bg-[#121212] border border-[#242424] rounded-2xl p-4 flex flex-col gap-3 shadow-inner relative overflow-hidden select-none">
+          <div className="flex justify-between items-center border-b border-[#242424] pb-2">
+            <span className="text-[9px] font-bold text-slate-400 font-syne">PALETA CORPORATIVA</span>
             <div className="flex gap-1.5">
-              <span className="w-3.5 h-3.5 rounded-full bg-[#3B82F6] cursor-pointer border-2 border-white/20 shadow-sm" />
+              <span className="w-3.5 h-3.5 rounded-full bg-[#D23369] cursor-pointer border-2 border-white/20 shadow-sm" />
               <span className="w-3.5 h-3.5 rounded-full bg-[#10B981] cursor-pointer border border-transparent shadow-sm" />
-              <span className="w-3.5 h-3.5 rounded-full bg-[#ec4899] cursor-pointer border border-transparent shadow-sm" />
+              <span className="w-3.5 h-3.5 rounded-full bg-[#3B82F6] cursor-pointer border border-transparent shadow-sm" />
             </div>
           </div>
-          <div className="p-3 bg-slate-950 rounded-xl border border-slate-800 flex flex-col gap-2">
-            <div className="flex items-center justify-between text-[9px] font-bold text-slate-300">
+          <div className="p-3 bg-[#1A1A1A] rounded-xl border border-[#242424] flex flex-col gap-2">
+            <div className="flex items-center justify-between text-[8px] font-bold text-slate-400">
               <span>HEX Corporativo</span>
-              <span className="text-cyan-400 font-mono">#3B82F6</span>
+              <span className="text-[#D23369] font-mono">#D23369</span>
             </div>
-            <div className="h-2 w-full rounded-full bg-slate-800 overflow-hidden flex">
-              <div className="h-full w-[46%] bg-[#3B82F6]" />
-              <div className="h-full w-[50%] bg-[#3B82F6]/20" />
+            <div className="h-2 w-full rounded-full bg-[#242424] overflow-hidden flex">
+              <div className="h-full w-[46%] bg-[#D23369]" />
+              <div className="h-full w-[54%] bg-[#D23369]/20" />
             </div>
           </div>
           <div className="mt-auto grid grid-cols-2 gap-2">
-            <div className="h-8 rounded-lg bg-[#3B82F6]/10 border border-[#3B82F6]/30 flex items-center justify-center text-[9px] font-extrabold text-[#3B82F6]">
+            <div className="h-8 rounded-lg bg-[#D23369]/10 border border-[#D23369]/30 flex items-center justify-center text-[8px] font-extrabold text-[#D23369]">
               Fondo Pastel Soft
             </div>
-            <div className="h-8 rounded-lg bg-[#3B82F6] flex items-center justify-center text-[9px] font-extrabold text-white shadow-lg shadow-[#3B82F6]/20">
+            <div className="h-8 rounded-lg bg-[#D23369] flex items-center justify-center text-[8px] font-extrabold text-white shadow-lg shadow-[#D23369]/20">
               Botón Corporativo
             </div>
           </div>
@@ -163,34 +161,34 @@ export default function LandingPage() {
       badge: "Seguridad y Roles",
       color: "from-blue-500 to-indigo-600",
       graphic: (
-        <div className="w-full h-full bg-slate-900 border border-blue-500/20 rounded-2xl p-4 flex flex-col gap-2.5 shadow-inner relative overflow-hidden select-none">
-          <div className="flex justify-between items-center border-b border-slate-800 pb-2">
-            <span className="text-[10px] font-bold text-slate-400">EQUIPO Y ACCESOS</span>
-            <span className="px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 text-[7px] font-bold border border-blue-500/20">ROLES ACTIVOS</span>
+        <div className="w-full h-full bg-[#121212] border border-[#242424] rounded-2xl p-4 flex flex-col gap-2.5 shadow-inner relative overflow-hidden select-none">
+          <div className="flex justify-between items-center border-b border-[#242424] pb-2">
+            <span className="text-[9px] font-bold text-slate-400 font-syne">EQUIPO Y ACCESOS</span>
+            <span className="px-1.5 py-0.5 rounded bg-[#D23369]/10 text-[#D23369] text-[7px] font-bold border border-[#D23369]/20">ROLES ACTIVOS</span>
           </div>
           <div className="flex flex-col gap-1.5">
-            <div className="p-2 bg-slate-950/80 border border-slate-800 rounded-xl flex items-center justify-between">
+            <div className="p-2 bg-[#1A1A1A] border border-[#242424] rounded-xl flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="w-6 h-6 rounded-full bg-blue-500/15 flex items-center justify-center text-[10px] font-bold text-blue-400">YL</div>
+                <div className="w-6 h-6 rounded-full bg-[#D23369]/15 flex items-center justify-center text-[10px] font-bold text-[#D23369]">YL</div>
                 <div>
-                  <p className="text-[9px] font-black text-slate-200">Yuli López</p>
+                  <p className="text-[8px] font-black text-slate-200">Yuli López</p>
                   <p className="text-[7px] text-slate-500">yuli@belladerma.com</p>
                 </div>
               </div>
-              <span className="px-2 py-0.5 rounded text-[8px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/10">Dueño (Admin)</span>
+              <span className="px-2 py-0.5 rounded text-[7px] font-bold bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/10">Dueño (Admin)</span>
             </div>
-            <div className="p-2 bg-slate-950/80 border border-slate-800 rounded-xl flex items-center justify-between">
+            <div className="p-2 bg-[#1A1A1A] border border-[#242424] rounded-xl flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center text-[10px] font-bold text-slate-400">CR</div>
                 <div>
-                  <p className="text-[9px] font-black text-slate-300">Camila Ruiz</p>
+                  <p className="text-[8px] font-black text-slate-300">Camila Ruiz</p>
                   <p className="text-[7px] text-slate-500">camila@belladerma.com</p>
                 </div>
               </div>
-              <span className="px-2 py-0.5 rounded text-[8px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/10">Recepcionista</span>
+              <span className="px-2 py-0.5 rounded text-[7px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/10">Vendedora</span>
             </div>
           </div>
-          <p className="text-[8px] text-slate-500 font-bold text-center mt-auto border-t border-slate-800/50 pt-1.5">🔒 Aislamiento de datos comerciales 100% activo</p>
+          <p className="text-[7px] text-slate-500 font-bold text-center mt-auto border-t border-[#242424] pt-1.5">🔒 Aislamiento de datos comerciales activo</p>
         </div>
       )
     }
@@ -248,14 +246,13 @@ export default function LandingPage() {
       setLeadSuccess(true);
       setSubmittingLead(false);
 
-      // Trackear conversión de Lead en Meta Pixel
+      // Trackear conversión en Meta Pixel
       trackMetaEvent("Lead", {
         plan: leadForm.plan_interes,
         salon: leadForm.nombre_salon,
         propietario: leadForm.nombre_propietario
       });
 
-      // Redirigir al registro pre-rellenado tras 3 segundos
       setTimeout(() => {
         const queryParams = new URLSearchParams({
           signup: "true",
@@ -269,51 +266,51 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-sky-500 selection:text-white overflow-x-hidden antialiased">
+    <div className="min-h-screen bg-[#121212] text-[#F8FAFC] font-sans selection:bg-[#D23369] selection:text-white overflow-x-hidden antialiased">
       {/* Meta Pixel Tracker Component */}
       <MetaPixel />
 
       {/* BANNER SESIÓN ACTIVA DETECTADA */}
       {sessionActive && (
-        <div className="bg-sky-700 text-white py-2.5 px-4 text-xs font-bold text-center flex items-center justify-center gap-2 relative z-50 shadow-md">
+        <div className="bg-[#D23369] text-white py-2.5 px-4 text-xs font-bold text-center flex items-center justify-center gap-2 relative z-50 shadow-md">
           <Activity size={14} className="animate-pulse" />
-          <span>¡Hola {userName || "de nuevo"}! Hemos detectado tu sesión de salón activa en este navegador.</span>
-          <Link href="/dashboard" className="underline hover:text-sky-100 ml-1.5 flex items-center gap-0.5 bg-white/10 px-3 py-0.5 rounded-full border border-white/20">
+          <span className="font-sans">¡Hola {userName || "de nuevo"}! Hemos detectado tu sesión de salón activa en este navegador.</span>
+          <Link href="/dashboard" className="underline hover:text-pink-100 ml-1.5 flex items-center gap-0.5 bg-white/10 px-3 py-0.5 rounded-full border border-white/20 font-sans">
             Ir al Dashboard Directo <ArrowRight size={12} />
           </Link>
         </div>
       )}
 
-      {/* HEADER MINIMALISTA - ESTILO A. CARRIÓN */}
-      <header className="border-b border-slate-100 bg-white/95 backdrop-blur-md sticky top-0 z-45 px-6 py-4 max-w-7xl mx-auto w-full flex items-center justify-between">
+      {/* HEADER MINIMALISTA - ESTILO SAAS TECH VIP */}
+      <header className="border-b border-[#242424] bg-[#121212]/95 backdrop-blur-md sticky top-0 z-40 px-6 py-4 max-w-7xl mx-auto w-full flex items-center justify-between select-none">
         <div className="flex items-center gap-3">
-          <span className="w-8 h-8 rounded-lg bg-sky-600 flex items-center justify-center text-white text-sm font-black shadow-sm">
+          <span className="w-8 h-8 rounded-lg bg-[#D23369] flex items-center justify-center text-white text-sm font-black shadow-sm font-syne">
             G
           </span>
           <div>
-            <span className="text-sm font-extrabold tracking-tight text-slate-900 block leading-tight">GlowDesk</span>
-            <span className="text-[7px] font-black text-sky-600 block tracking-widest leading-none">BEAUTY CONTROL</span>
+            <span className="text-sm font-extrabold tracking-tight text-[#F8FAFC] block leading-tight font-syne">GlowDesk</span>
+            <span className="text-[7px] font-black text-[#D23369] block tracking-widest leading-none font-syne">BEAUTY CONTROL</span>
           </div>
         </div>
 
-        <nav className="hidden md:flex items-center gap-8 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
-          <a href="#dolor" className="hover:text-sky-600 transition-colors">El Problema</a>
-          <a href="#consecuencia" className="hover:text-sky-600 transition-colors">El Impacto</a>
-          <a href="#solucion" className="hover:text-sky-600 transition-colors">La Solución</a>
-          <a href="#resultados" className="hover:text-sky-600 transition-colors">Resultados</a>
-          <a href="#planes" className="hover:text-sky-600 transition-colors">Planes</a>
+        <nav className="hidden md:flex items-center gap-8 text-[10px] font-bold text-slate-400 uppercase tracking-widest font-syne">
+          <a href="#dolor" className="hover:text-[#D23369] transition-colors">El Caos</a>
+          <a href="#consecuencia" className="hover:text-[#D23369] transition-colors">El Impacto</a>
+          <a href="#solucion" className="hover:text-[#D23369] transition-colors">La Solución</a>
+          <a href="#resultados" className="hover:text-[#D23369] transition-colors">Resultados</a>
+          <a href="#planes" className="hover:text-[#D23369] transition-colors">Planes</a>
         </nav>
 
         <div className="flex items-center gap-3">
           <Link 
             href="/login" 
-            className="text-[11px] font-bold uppercase tracking-widest px-4 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition-all"
+            className="text-[10px] font-bold uppercase tracking-widest px-4 py-2.5 rounded-lg text-slate-300 hover:text-white border border-[#242424] bg-[#1A1A1A]/80 hover:bg-[#1A1A1A] transition-all font-syne"
           >
             Ingresar
           </Link>
           <a 
             href="#registro-prospecto" 
-            className="text-[11px] font-extrabold uppercase tracking-widest px-4.5 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white transition-all shadow-sm flex items-center gap-1.5"
+            className="text-[10px] font-extrabold uppercase tracking-widest px-4.5 py-2.5 rounded-lg bg-[#D23369] hover:bg-[#C70039] text-white transition-all shadow-sm flex items-center gap-1.5 font-syne hover:scale-[1.02] active:scale-[0.98] duration-200"
           >
             Iniciar Gratis <Zap size={12} />
           </a>
@@ -321,51 +318,66 @@ export default function LandingPage() {
       </header>
 
       {/* ========================================================
-          1. DOLOR (PAIN) - HERO SECTION
+          1. DOLOR (PAIN) - HERO & PITCH INICIAL
           ======================================================== */}
-      <section id="dolor" className="max-w-7xl mx-auto px-6 pt-16 pb-20 border-b border-slate-100">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-rose-700 text-[10px] font-black uppercase tracking-widest mb-6 animate-fade-in">
-            <AlertTriangle size={11} /> Diagnóstico Comercial de Estética
-          </div>
-          
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.08] mb-6">
-            ¿Tu Spa realmente crece, o solo estás <span className="text-sky-600">trabajando el doble</span> para cubrir fugas silenciosas de dinero?
+      <section id="dolor" className="max-w-7xl mx-auto px-6 pt-20 pb-24 border-b border-[#242424] relative">
+        <div className="absolute top-10 left-1/2 -translate-x-1/2 w-[60%] h-[350px] rounded-full bg-[#D23369]/5 blur-[120px] pointer-events-none" />
+        
+        <div className="text-center max-w-4xl mx-auto relative z-10">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-[#F8FAFC] leading-[1.08] mb-6 font-syne">
+            ¿Tu Spa realmente crece, o solo estás <span className="text-[#D23369]">trabajando el doble</span> para cubrir fugas silenciosas de dinero?
           </h1>
 
-          <p className="text-sm md:text-base text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
-            El caos operativo en la administración diaria es el enemigo invisible: estilistas inconformes por comisiones mal calculadas, recepcionistas cometiendo errores de caja, y horas tiradas a la basura intentando recordar citas por WhatsApp uno por uno.
+          <p className="text-sm md:text-base text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+            El desorden administrativo diario es un enemigo invisible: estilistas insatisfechos por comisiones mal calculadas, recepcionistas cometiendo errores de facturación, y horas tiradas a la basura intentando recordar citas por WhatsApp uno por uno.
           </p>
+
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a 
+              href="#solucion" 
+              className="w-full sm:w-auto text-[11px] font-bold uppercase tracking-wider px-8 py-4.5 rounded-xl bg-[#D23369] hover:bg-[#C70039] text-white transition-all shadow-md flex items-center justify-center gap-2 font-syne hover:scale-[1.02] active:scale-[0.98] duration-200 cursor-pointer"
+            >
+              Ver Demo Interactiva <Play size={14} fill="white" />
+            </a>
+            <a 
+              href="https://wa.me/51987088359?text=Hola,%20quiero%20reservar%20una%20demostraci%C3%B3n%20personalizada%20de%20GlowDesk."
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full sm:w-auto text-[11px] font-bold uppercase tracking-wider px-8 py-4.5 rounded-xl bg-[#1A1A1A] border border-[#242424] hover:border-slate-600 text-slate-300 hover:text-white transition-all flex items-center justify-center gap-2 font-syne hover:scale-[1.02] active:scale-[0.98] duration-200"
+            >
+              Contactar por WhatsApp <MessageSquare size={14} className="text-[#D23369]" />
+            </a>
+          </div>
         </div>
 
-        {/* Mosaico de Dolores (Pain Points) */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 max-w-6xl mx-auto">
-          <div className="p-6.5 rounded-xl border border-slate-100 bg-slate-50/30 flex flex-col gap-4">
-            <div className="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-sm">
+        {/* Grilla de Dolores Terrenales */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-6xl mx-auto relative z-10">
+          <div className="p-7.5 rounded-2xl border border-[#242424] bg-[#1A1A1A]/40 hover:bg-[#1A1A1A]/80 hover:border-[#D23369]/30 transition-all duration-300 flex flex-col gap-4.5 group">
+            <div className="w-10 h-10 rounded-lg bg-[#D23369]/10 text-[#D23369] flex items-center justify-center font-bold text-sm font-syne">
               01
             </div>
-            <h3 className="text-base font-extrabold text-slate-900">Comisiones Caóticas</h3>
-            <p className="text-xs text-slate-500 leading-relaxed font-medium">
+            <h3 className="text-base font-extrabold text-[#F8FAFC] font-syne">Comisiones Caóticas</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-medium">
               Tus estilistas y colaboradores discuten por discrepancias en sus pagos al final del mes. La falta de cálculos automáticos mina la confianza de tu equipo de trabajo.
             </p>
           </div>
 
-          <div className="p-6.5 rounded-xl border border-slate-100 bg-slate-50/30 flex flex-col gap-4">
-            <div className="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-sm">
+          <div className="p-7.5 rounded-2xl border border-[#242424] bg-[#1A1A1A]/40 hover:bg-[#1A1A1A]/80 hover:border-[#D23369]/30 transition-all duration-300 flex flex-col gap-4.5 group">
+            <div className="w-10 h-10 rounded-lg bg-[#D23369]/10 text-[#D23369] flex items-center justify-center font-bold text-sm font-syne">
               02
             </div>
-            <h3 className="text-base font-extrabold text-slate-900">Caja Descuadrada</h3>
-            <p className="text-xs text-slate-500 leading-relaxed font-medium">
+            <h3 className="text-base font-extrabold text-[#F8FAFC] font-syne">Caja Descuadrada</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-medium">
               Ventas de productos que no se descuentan del inventario, descuentos informales otorgados en recepción y dinero en efectivo que desaparece sin explicaciones contables claras.
             </p>
           </div>
 
-          <div className="p-6.5 rounded-xl border border-slate-100 bg-slate-50/30 flex flex-col gap-4">
-            <div className="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-sm">
+          <div className="p-7.5 rounded-2xl border border-[#242424] bg-[#1A1A1A]/40 hover:bg-[#1A1A1A]/80 hover:border-[#D23369]/30 transition-all duration-300 flex flex-col gap-4.5 group">
+            <div className="w-10 h-10 rounded-lg bg-[#D23369]/10 text-[#D23369] flex items-center justify-center font-bold text-sm font-syne">
               03
             </div>
-            <h3 className="text-base font-extrabold text-slate-900">El Abismo de los No-Shows</h3>
-            <p className="text-xs text-slate-500 leading-relaxed font-medium">
+            <h3 className="text-base font-extrabold text-[#F8FAFC] font-syne">El Abismo de los No-Shows</h3>
+            <p className="text-xs text-slate-400 leading-relaxed font-medium">
               Clientes que reservan cabinas completas de estética y simplemente no asisten, dejándote con el personal pagado y bloqueando a clientes reales que sí deseaban pagar por el servicio.
             </p>
           </div>
@@ -375,104 +387,101 @@ export default function LandingPage() {
       {/* ========================================================
           2. CONSECUENCIA (CONSEQUENCE)
           ======================================================== */}
-      <section id="consecuencia" className="bg-slate-50/50 py-20 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="consecuencia" className="bg-[#1A1A1A]/30 py-24 border-b border-[#242424] relative">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[10px] font-black text-rose-600 tracking-widest uppercase block mb-2">El Costo de No Actuar</span>
-            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+            <span className="text-[9px] font-black text-[#D23369] tracking-widest uppercase block mb-2 font-syne">El Costo de No Actuar</span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#F8FAFC] tracking-tight font-syne">
               Ignorar estas ineficiencias tiene consecuencias severas e inevitables en tu negocio
             </h2>
-            <p className="text-slate-500 text-xs md:text-sm mt-3 font-medium">
-              No se trata solo de un desorden operativo; es un drenaje activo sobre el margen de ganancia real y el futuro de tu marca.
+            <p className="text-slate-400 text-xs md:text-sm mt-3 font-medium">
+              No se trata solo de un desorden operativo; es un drenaje activo sobre el margen de ganancia real y la reputación de tu marca.
             </p>
           </div>
 
-          {/* Grilla de Consecuencias Directas */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            
             {/* Consecuencia 1 */}
-            <div className="p-6 rounded-xl bg-white border border-slate-150 flex flex-col gap-4.5 shadow-sm">
-              <div className="text-rose-500 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+            <div className="p-6 rounded-2xl bg-[#1A1A1A] border border-[#242424] hover:border-slate-800 transition-all flex flex-col gap-4 shadow-sm hover:scale-[1.01] duration-350">
+              <div className="text-[#EF4444] flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-syne">
                 <TrendingDown size={14} /> Fuga de Margen
               </div>
-              <h3 className="text-sm font-extrabold text-slate-900">Pérdida del 35% de Rentabilidad</h3>
-              <p className="text-xs text-slate-500 font-medium leading-relaxed">
+              <h3 className="text-sm font-extrabold text-[#F8FAFC] font-syne leading-snug">Pérdida del 35% de Rentabilidad</h3>
+              <p className="text-xs text-slate-400 font-medium leading-relaxed">
                 Hasta un tercio de las utilidades netas mensuales de los salones tradicionales se escurren en comisiones duplicadas y fugas hormiga en caja.
               </p>
             </div>
 
             {/* Consecuencia 2 */}
-            <div className="p-6 rounded-xl bg-white border border-slate-150 flex flex-col gap-4.5 shadow-sm">
-              <div className="text-rose-500 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+            <div className="p-6 rounded-2xl bg-[#1A1A1A] border border-[#242424] hover:border-slate-800 transition-all flex flex-col gap-4 shadow-sm hover:scale-[1.01] duration-350">
+              <div className="text-[#EF4444] flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-syne">
                 <Clock size={14} /> Esclavitud Operativa
               </div>
-              <h3 className="text-sm font-extrabold text-slate-900">15+ Horas Semanales Perdidas</h3>
-              <p className="text-xs text-slate-500 font-medium leading-relaxed">
+              <h3 className="text-sm font-extrabold text-[#F8FAFC] font-syne leading-snug">15+ Horas Semanales Perdidas</h3>
+              <p className="text-xs text-slate-400 font-medium leading-relaxed">
                 Pasar los domingos por la noche persiguiendo a las vendedoras o cuadrando en Excel en lugar de centrarte en abrir nuevas sedes del Spa.
               </p>
             </div>
 
             {/* Consecuencia 3 */}
-            <div className="p-6 rounded-xl bg-white border border-slate-150 flex flex-col gap-4.5 shadow-sm">
-              <div className="text-rose-500 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+            <div className="p-6 rounded-2xl bg-[#1A1A1A] border border-[#242424] hover:border-slate-800 transition-all flex flex-col gap-4 shadow-sm hover:scale-[1.01] duration-350">
+              <div className="text-[#EF4444] flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-syne">
                 <Shield size={14} /> Fuga de Clientes
               </div>
-              <h3 className="text-sm font-extrabold text-slate-900">Migración hacia Competidores</h3>
-              <p className="text-xs text-slate-500 font-medium leading-relaxed">
+              <h3 className="text-sm font-extrabold text-[#F8FAFC] font-syne leading-snug">Migración hacia Competidores</h3>
+              <p className="text-xs text-slate-400 font-medium leading-relaxed">
                 Los clientes VIP buscan puntualidad y seriedad. Si tu sistema de reservas se siente manual e informal, se irán con spas que operan digitalmente.
               </p>
             </div>
 
             {/* Consecuencia 4 */}
-            <div className="p-6 rounded-xl bg-white border border-slate-150 flex flex-col gap-4.5 shadow-sm">
-              <div className="text-rose-500 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+            <div className="p-6 rounded-2xl bg-[#1A1A1A] border border-[#242424] hover:border-slate-800 transition-all flex flex-col gap-4 shadow-sm hover:scale-[1.01] duration-350">
+              <div className="text-[#EF4444] flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider font-syne">
                 <Lock size={14} /> Vulnerabilidad Total
               </div>
-              <h3 className="text-sm font-extrabold text-slate-900">Acceso Financiero sin Filtros</h3>
-              <p className="text-xs text-slate-500 font-medium leading-relaxed">
+              <h3 className="text-sm font-extrabold text-[#F8FAFC] font-syne leading-snug">Acceso Financiero sin Filtros</h3>
+              <p className="text-xs text-slate-400 font-medium leading-relaxed">
                 Dejar toda tu información de utilidades macro y base de datos de clientes al alcance de cualquier recepcionista temporal de tu negocio.
               </p>
             </div>
-
           </div>
         </div>
       </section>
 
       {/* ========================================================
-          3. SOLUCIÓN (SOLUTION)
+          3. SOLUCIÓN (SOLUTION) & DEMO
           ======================================================== */}
-      <section id="solucion" className="py-20 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="solucion" className="py-24 border-b border-[#242424] relative">
+        <div className="absolute top-[30%] right-[10%] w-[35%] h-[300px] rounded-full bg-[#D23369]/5 blur-[120px] pointer-events-none" />
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[10px] font-black text-sky-600 tracking-widest uppercase block mb-2">La Alternativa Inteligente</span>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+            <span className="text-[9px] font-black text-[#D23369] tracking-widest uppercase block mb-2 font-syne">La Alternativa Inteligente</span>
+            <h2 className="text-3xl lg:text-4xl font-extrabold text-[#F8FAFC] tracking-tight font-syne">
               Presentamos GlowDesk: El Sistema de Operación y Control VIP para Spas
             </h2>
-            <p className="text-slate-500 text-xs md:text-sm mt-3 font-medium">
-              Diseñado minuciosamente para eliminar los cuellos de botella contables, automatizar la asistencia del cliente, y darte control absoluto sin importar dónde te encuentres físicamente.
+            <p className="text-slate-400 text-xs md:text-sm mt-3 font-medium">
+              Diseñado minuciosamente para eliminar los cuellos de botella contables, automatizar la asistencia del cliente, y darte control absoluto en una interfaz premium.
             </p>
           </div>
 
-          {/* DEMO REPRODUCTOR INTERACTIVO SIMULADO */}
-          <div className="max-w-4xl mx-auto bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-xl mb-16 select-none text-slate-100">
+          {/* SIMULADOR VSL INTERACTIVO MOCKUP */}
+          <div className="max-w-4xl mx-auto bg-[#1A1A1A] border border-[#242424] rounded-2xl overflow-hidden shadow-2xl mb-16 select-none text-slate-100">
             {!vslStarted ? (
-              /* Miniatura inicial */
-              <div className="aspect-video w-full bg-slate-950 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-br from-slate-950 to-sky-950/20 opacity-80" />
-                <div className="absolute -top-[10%] left-[-10%] w-[40%] h-[40%] bg-sky-500/10 rounded-full blur-[80px]" />
+              <div className="aspect-video w-full bg-[#121212]/95 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-[#121212] to-[#D23369]/5 opacity-80" />
                 
-                <div className="relative z-10 flex flex-col items-center gap-4">
+                <div className="relative z-10 flex flex-col items-center gap-4.5">
                   <button 
                     onClick={() => setVslStarted(true)}
-                    className="w-16 h-16 rounded-full bg-sky-600 hover:bg-sky-700 text-white flex items-center justify-center shadow-lg hover:scale-105 transition-all cursor-pointer relative"
+                    className="w-16 h-16 rounded-full bg-[#D23369] hover:bg-[#C70039] text-white flex items-center justify-center shadow-lg hover:scale-105 active:scale-95 transition-all cursor-pointer relative"
                   >
                     <Play size={22} fill="white" className="ml-1" />
-                    <span className="absolute -inset-1.5 rounded-full border border-sky-400/30 animate-ping pointer-events-none" />
+                    <span className="absolute -inset-1.5 rounded-full border border-[#D23369]/30 animate-ping pointer-events-none" />
                   </button>
 
                   <div className="mt-2">
-                    <span className="px-2.5 py-1 rounded bg-sky-500/15 text-sky-400 text-[9px] font-black uppercase tracking-wider border border-sky-500/20">TOUR DE PRODUCTO</span>
-                    <h3 className="text-lg md:text-xl font-black text-white tracking-tight mt-2.5">
+                    <span className="px-2.5 py-1 rounded bg-[#D23369]/15 text-[#D23369] text-[9px] font-black uppercase tracking-wider border border-[#D23369]/20 font-syne">TOUR DE PRODUCTO</span>
+                    <h3 className="text-lg md:text-xl font-black text-white tracking-tight mt-2.5 font-syne">
                       Explora la Interfaz de GlowDesk en un Clic
                     </h3>
                     <p className="text-xs text-slate-400 mt-1 max-w-sm font-medium">
@@ -482,22 +491,21 @@ export default function LandingPage() {
                 </div>
               </div>
             ) : (
-              /* Reproductor VSL Activo */
-              <div className="aspect-video w-full bg-slate-950 flex flex-col relative">
-                <div className="p-4 bg-slate-900/60 border-b border-slate-800 flex items-center justify-between text-[10px] font-bold text-slate-300">
+              <div className="aspect-video w-full bg-[#121212] flex flex-col relative">
+                <div className="p-4 bg-[#1A1A1A]/60 border-b border-[#242424] flex items-center justify-between text-[10px] font-bold text-slate-350">
                   <div className="flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
-                    <span>DEMOSTRACIÓN ACTIVA</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-pulse" />
+                    <span className="font-syne">DEMOSTRACIÓN ACTIVA</span>
                   </div>
-                  <span className="text-[9px] text-sky-400 font-extrabold tracking-widest uppercase">
+                  <span className="text-[9px] text-[#D23369] font-extrabold tracking-widest uppercase font-syne">
                     {vslSlides[vslSlide].badge}
                   </span>
                 </div>
 
                 <div className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
                   <div className="flex flex-col gap-3 justify-center text-left">
-                    <span className="text-[9px] font-black text-sky-400 tracking-widest block uppercase">MÓDULO DE CONTROL</span>
-                    <h3 className="text-base md:text-lg font-black text-white tracking-tight leading-snug">
+                    <span className="text-[9px] font-black text-[#D23369] tracking-widest block uppercase font-syne">MÓDULO DE CONTROL</span>
+                    <h3 className="text-base md:text-lg font-black text-white tracking-tight leading-snug font-syne">
                       {vslSlides[vslSlide].title}
                     </h3>
                     <p className="text-[10px] md:text-xs text-slate-400 leading-relaxed font-medium">
@@ -510,7 +518,7 @@ export default function LandingPage() {
                           setVslSlide(curr => (curr - 1 + vslSlides.length) % vslSlides.length);
                           setVslProgress(0);
                         }}
-                        className="px-3 py-1.5 rounded bg-slate-900 border border-slate-800 hover:border-slate-700 text-[9px] font-extrabold text-slate-400 hover:text-white transition-all cursor-pointer"
+                        className="px-3 py-1.5 rounded bg-[#1A1A1A] border border-[#242424] hover:border-slate-600 text-[9px] font-extrabold text-slate-400 hover:text-white transition-all cursor-pointer font-syne"
                       >
                         Anterior
                       </button>
@@ -519,7 +527,7 @@ export default function LandingPage() {
                           setVslSlide(curr => (curr + 1) % vslSlides.length);
                           setVslProgress(0);
                         }}
-                        className="px-3.5 py-1.5 rounded bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-[9px] transition-all cursor-pointer shadow-sm"
+                        className="px-3.5 py-1.5 rounded bg-[#D23369] hover:bg-[#C70039] text-white font-extrabold text-[9px] transition-all cursor-pointer shadow-sm font-syne"
                       >
                         Siguiente Módulo
                       </button>
@@ -532,14 +540,14 @@ export default function LandingPage() {
                 </div>
 
                 {/* Barra de progreso */}
-                <div className="bg-slate-900/80 p-4 border-t border-slate-800 flex flex-col gap-2">
-                  <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden cursor-pointer" onClick={() => setVslProgress(0)}>
+                <div className="bg-[#1A1A1A]/80 p-4 border-t border-[#242424] flex flex-col gap-2">
+                  <div className="h-1 w-full bg-[#242424] rounded-full overflow-hidden cursor-pointer" onClick={() => setVslProgress(0)}>
                     <div 
-                      className="h-full bg-sky-500 transition-all duration-100" 
+                      className="h-full bg-[#D23369] transition-all duration-100" 
                       style={{ width: `${vslProgress}%` }}
                     />
                   </div>
-                  <div className="flex justify-between items-center text-[9px] font-bold text-slate-500">
+                  <div className="flex justify-between items-center text-[9px] font-bold text-slate-500 font-syne">
                     <div className="flex items-center gap-3">
                       <button onClick={() => setVslStarted(false)} className="text-red-500 hover:underline cursor-pointer">
                         Cerrar Demo
@@ -553,48 +561,46 @@ export default function LandingPage() {
             )}
           </div>
 
-          {/* Tres Pilares Corporativos de la Solución */}
+          {/* Tres Pilares Corporativos */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            
             {/* Pilar 1 */}
             <div className="flex gap-4 group">
-              <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100">
+              <div className="w-10 h-10 rounded-lg bg-[#D23369]/10 text-[#D23369] flex items-center justify-center shrink-0 border border-[#D23369]/20">
                 <Smartphone size={18} />
               </div>
               <div>
-                <h4 className="text-sm font-extrabold text-slate-900 mb-1.5">WhatsApp Emisor Proporcional</h4>
-                <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                  Los recordatorios y confirmaciones automáticas de reservas se despachan directamente utilizando tu propio número comercial configurado de tu Spa, garantizando seriedad al cliente final.
+                <h4 className="text-sm font-extrabold text-[#F8FAFC] mb-1.5 font-syne">WhatsApp Emisor Propio</h4>
+                <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                  Los recordatorios y confirmaciones automáticas de reservas se despachan directamente utilizando tu propio número comercial de Spa, garantizando seriedad y marca.
                 </p>
               </div>
             </div>
 
             {/* Pilar 2 */}
             <div className="flex gap-4 group">
-              <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100">
+              <div className="w-10 h-10 rounded-lg bg-[#D23369]/10 text-[#D23369] flex items-center justify-center shrink-0 border border-[#D23369]/20">
                 <Sparkles size={18} />
               </div>
               <div>
-                <h4 className="text-sm font-extrabold text-slate-900 mb-1.5">Personalización Estética Corporativa</h4>
-                <p className="text-xs text-slate-500 leading-relaxed font-medium">
-                  Modifica el tono de marca e introduce tus códigos de color. La plataforma calcula automáticamente variables pasteles ideales y hovers armoniosos que lucen VIP y profesionales.
+                <h4 className="text-sm font-extrabold text-[#F8FAFC] mb-1.5 font-syne">Personalización Cromática HSL</h4>
+                <p className="text-xs text-slate-400 leading-relaxed font-medium">
+                  Modifica el tono de tu marca e introduce tus códigos de color. La plataforma calcula automáticamente variables pasteles ideales y hovers armoniosos que lucen VIP.
                 </p>
               </div>
             </div>
 
             {/* Pilar 3 */}
             <div className="flex gap-4 group">
-              <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100">
+              <div className="w-10 h-10 rounded-lg bg-[#D23369]/10 text-[#D23369] flex items-center justify-center shrink-0 border border-[#D23369]/20">
                 <Lock size={18} />
               </div>
               <div>
-                <h4 className="text-sm font-extrabold text-slate-900 mb-1.5">Aislamiento de Roles y Caja Blindada</h4>
-                <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                <h4 className="text-sm font-extrabold text-[#F8FAFC] mb-1.5 font-syne">Caja y Roles Blindados</h4>
+                <p className="text-xs text-slate-400 leading-relaxed font-medium">
                   Asigna accesos con privilegios reducidos a recepcionistas y estilistas. Ellos solo capturan ingresos y egresos ordinarios; tú dominas la rentabilidad neta a nivel macro.
                 </p>
               </div>
             </div>
-
           </div>
         </div>
       </section>
@@ -602,56 +608,54 @@ export default function LandingPage() {
       {/* ========================================================
           4. RESULTADOS (RESULTS)
           ======================================================== */}
-      <section id="resultados" className="bg-slate-50/50 py-20 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="resultados" className="bg-[#1A1A1A]/30 py-24 border-b border-[#242424] relative">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[10px] font-black text-sky-600 tracking-widest uppercase block mb-2">Métricas e Impacto Real</span>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+            <span className="text-[9px] font-black text-[#D23369] tracking-widest uppercase block mb-2 font-syne">Métricas de Rendimiento</span>
+            <h2 className="text-3xl font-extrabold text-[#F8FAFC] tracking-tight font-syne">
               Los resultados medibles que obtienes desde los primeros 30 días
             </h2>
-            <p className="text-slate-500 text-xs md:text-sm mt-3 font-medium">
+            <p className="text-slate-400 text-xs md:text-sm mt-3 font-medium">
               GlowDesk no es solo software de administración; es el motor que incrementa la asistencia y blinda la caja de tu Spa.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto text-center">
-            
             {/* Stat 1 */}
-            <div className="p-6 rounded-xl bg-white border border-slate-150 shadow-sm flex flex-col gap-2">
-              <span className="text-4xl md:text-5xl font-black text-sky-600 block">-80%</span>
-              <span className="text-xs font-black text-slate-900 uppercase tracking-widest">En No-Shows</span>
-              <p className="text-xs text-slate-500 font-medium leading-relaxed mt-1">
-                La mensajería automatizada desde tu propio emisor de WhatsApp hace casi imposible que los clientes olviden asistir a su servicio agendado.
+            <div className="p-6 rounded-2xl bg-[#1A1A1A] border border-[#242424] shadow-sm flex flex-col gap-2 hover:scale-[1.02] duration-300">
+              <span className="text-4xl md:text-5xl font-black text-[#D23369] block font-syne">-80%</span>
+              <span className="text-xs font-black text-[#F8FAFC] uppercase tracking-widest font-syne">En No-Shows</span>
+              <p className="text-xs text-slate-400 font-medium leading-relaxed mt-1">
+                La mensajería automatizada desde tu propio emisor de WhatsApp hace casi imposible que los clientes olviden asistir a su servicio.
               </p>
             </div>
 
             {/* Stat 2 */}
-            <div className="p-6 rounded-xl bg-white border border-slate-150 shadow-sm flex flex-col gap-2">
-              <span className="text-4xl md:text-5xl font-black text-sky-600 block">+35%</span>
-              <span className="text-xs font-black text-slate-900 uppercase tracking-widest">Retención Comercial</span>
-              <p className="text-xs text-slate-500 font-medium leading-relaxed mt-1">
+            <div className="p-6 rounded-2xl bg-[#1A1A1A] border border-[#242424] shadow-sm flex flex-col gap-2 hover:scale-[1.02] duration-300">
+              <span className="text-4xl md:text-5xl font-black text-[#D23369] block font-syne">+35%</span>
+              <span className="text-xs font-black text-[#F8FAFC] uppercase tracking-widest font-syne">Retención Comercial</span>
+              <p className="text-xs text-slate-400 font-medium leading-relaxed mt-1">
                 El seguimiento post-servicio automatizado incrementa las visitas de tus clientes recurrentes sin requerir esfuerzo de tu personal.
               </p>
             </div>
 
             {/* Stat 3 */}
-            <div className="p-6 rounded-xl bg-white border border-slate-150 shadow-sm flex flex-col gap-2">
-              <span className="text-4xl md:text-5xl font-black text-sky-600 block">0%</span>
-              <span className="text-xs font-black text-slate-900 uppercase tracking-widest">Errores de Caja</span>
-              <p className="text-xs text-slate-500 font-medium leading-relaxed mt-1">
-                Cuadres al centavo, cálculo matemático instantáneo de comisiones de estilistas y reportes en tiempo real libres de manipulación humana.
+            <div className="p-6 rounded-2xl bg-[#1A1A1A] border border-[#242424] shadow-sm flex flex-col gap-2 hover:scale-[1.02] duration-300">
+              <span className="text-4xl md:text-5xl font-black text-[#D23369] block font-syne">0%</span>
+              <span className="text-xs font-black text-[#F8FAFC] uppercase tracking-widest font-syne">Errores de Caja</span>
+              <p className="text-xs text-slate-400 font-medium leading-relaxed mt-1">
+                Cuadres al centavo, cálculo matemático instantáneo de comisiones de estilistas y reportes contables libres de manipulación humana.
               </p>
             </div>
 
             {/* Stat 4 */}
-            <div className="p-6 rounded-xl bg-white border border-slate-150 shadow-sm flex flex-col gap-2">
-              <span className="text-4xl md:text-5xl font-black text-sky-600 block">+15hs</span>
-              <span className="text-xs font-black text-slate-900 uppercase tracking-widest">Libres por Semana</span>
-              <p className="text-xs text-slate-500 font-medium leading-relaxed mt-1">
-                Recupera tu tiempo libre de fines de semana. Automatiza y delega el spa con la absoluta certeza de que tus finanzas están seguras.
+            <div className="p-6 rounded-2xl bg-[#1A1A1A] border border-[#242424] shadow-sm flex flex-col gap-2 hover:scale-[1.02] duration-300">
+              <span className="text-4xl md:text-5xl font-black text-[#D23369] block font-syne">+15hs</span>
+              <span className="text-xs font-black text-[#F8FAFC] uppercase tracking-widest font-syne">Libres por Semana</span>
+              <p className="text-xs text-slate-400 font-medium leading-relaxed mt-1">
+                Recupera tu tiempo de fines de semana. Automatiza y delega el spa con la absoluta certeza de que tus finanzas están seguras.
               </p>
             </div>
-
           </div>
         </div>
       </section>
@@ -659,116 +663,129 @@ export default function LandingPage() {
       {/* ========================================================
           5. CTA (CALL TO ACTION) & FORMULARIO
           ======================================================== */}
-      <section id="registro-prospecto" className="py-20 max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-6xl mx-auto">
-          
-          {/* Lado Izquierdo Pitch de Cierre */}
+      <section id="registro-prospecto" className="py-24 max-w-7xl mx-auto px-6 relative">
+        <div className="absolute top-[20%] left-[20%] w-[50%] h-[350px] rounded-full bg-[#D23369]/5 blur-[120px] pointer-events-none" />
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-6xl mx-auto relative z-10">
+          {/* Lado Izquierdo Pitch */}
           <div className="lg:col-span-6 flex flex-col gap-5 text-left">
-            <span className="px-2.5 py-1 rounded bg-sky-50 border border-sky-100 text-sky-700 text-[10px] font-black uppercase tracking-widest w-fit">
-              OFERTA DE ACCESO INICIAL Limitada
+            <span className="px-2.5 py-1 rounded bg-[#D23369]/10 border border-[#D23369]/20 text-[#D23369] text-[9px] font-black uppercase tracking-widest w-fit font-syne">
+              OFERTA DE ACCESO INICIAL
             </span>
             
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#F8FAFC] tracking-tight leading-[1.1] font-syne">
               Reclama tu Acceso Gratuito de 30 Días & Transforma tu Spa Hoy Mismo
             </h2>
 
-            <p className="text-slate-500 text-xs md:text-sm font-medium leading-relaxed">
+            <p className="text-slate-400 text-xs md:text-sm font-medium leading-relaxed">
               No dejes que tu negocio continúe sangrando ganancias de forma silenciosa. Te ayudamos a integrar tu propia API comercial de WhatsApp y configurar tus colores de marca en menos de 24 horas. Sin tarjetas de crédito, cancela cuando quieras.
             </p>
 
             <div className="flex flex-col gap-3 mt-3">
               <div className="flex items-center gap-2.5">
-                <span className="w-5 h-5 rounded bg-sky-50 text-sky-600 flex items-center justify-center text-[10px] font-bold border border-sky-100">✓</span>
-                <span className="text-xs font-extrabold text-slate-700">Acceso completo sin límites al Plan Pro</span>
+                <span className="w-5 h-5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[10px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                <span className="text-xs font-extrabold text-slate-350">Acceso completo sin límites al Plan Pro</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="w-5 h-5 rounded bg-sky-50 text-sky-600 flex items-center justify-center text-[10px] font-bold border border-sky-100">✓</span>
-                <span className="text-xs font-extrabold text-slate-700">Configuración estética corporativa ilimitada</span>
+                <span className="w-5 h-5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[10px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                <span className="text-xs font-extrabold text-slate-350">Configuración estética cromática ilimitada</span>
               </div>
               <div className="flex items-center gap-2.5">
-                <span className="w-5 h-5 rounded bg-sky-50 text-sky-600 flex items-center justify-center text-[10px] font-bold border border-sky-100">✓</span>
-                <span className="text-xs font-extrabold text-slate-700">Asistencia técnica prioritaria de integración de WhatsApp</span>
+                <span className="w-5 h-5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[10px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                <span className="text-xs font-extrabold text-slate-350">Asistencia técnica prioritaria de integración de WhatsApp</span>
               </div>
+            </div>
+            
+            {/* WhatsApp Direct Action Button */}
+            <div className="mt-4 pt-4 border-t border-[#242424]">
+              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-2 font-syne">¿Prefieres agendar una demostración por llamada?</p>
+              <a 
+                href="https://wa.me/51987088359?text=Hola,%20quiero%20reservar%20una%20demostraci%C3%B3n%20personalizada%20de%20GlowDesk."
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-lg bg-[#1A1A1A] border border-[#242424] text-slate-300 hover:text-white text-xs font-bold font-syne hover:scale-[1.02] active:scale-[0.98] duration-200"
+              >
+                Reservar con Asesor al WhatsApp <ArrowUpRight size={13} className="text-[#D23369]" />
+              </a>
             </div>
           </div>
 
-          {/* Lado Derecho Tarjeta de Captura Minimalista */}
+          {/* Lado Derecho Formulario */}
           <div className="lg:col-span-6">
-            <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-lg relative overflow-hidden">
-              
+            <div className="bg-[#1A1A1A] border border-[#242424] p-8 rounded-2xl shadow-xl relative overflow-hidden">
               {!leadSuccess ? (
                 <form className="flex flex-col gap-4.5 relative z-10" onSubmit={handleLeadSubmit}>
                   <div className="text-center mb-2">
-                    <h3 className="text-lg font-black text-slate-900 tracking-tight">Solicitar mi Demostración Gratis</h3>
-                    <p className="text-slate-400 text-[9px] mt-0.5 font-extrabold uppercase tracking-wider">REGISTRO INMEDIATO SIN COMPROMISOS</p>
+                    <h3 className="text-lg font-black text-[#F8FAFC] tracking-tight font-syne">Solicitar mi Demostración Gratis</h3>
+                    <p className="text-[#D23369] text-[8px] mt-0.5 font-extrabold uppercase tracking-wider font-syne">REGISTRO INMEDIATO SIN COMPROMISOS</p>
                   </div>
 
                   {leadError && (
-                    <div className="p-3 bg-rose-50 border border-rose-100 text-rose-800 text-xs font-bold rounded-lg text-center">
+                    <div className="p-3 bg-red-950/40 border border-red-500/20 text-red-300 text-xs font-bold rounded-lg text-center">
                       {leadError}
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">Nombre Comercial de tu Salón/Spa</label>
+                    <label className="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-1 font-syne">Nombre Comercial de tu Salón/Spa</label>
                     <input 
                       name="nombre_salon"
                       type="text" 
                       required
                       value={leadForm.nombre_salon}
                       onChange={e => setLeadForm(prev => ({ ...prev, nombre_salon: e.target.value }))}
-                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-900 text-xs font-semibold transition-all"
+                      className="w-full px-4 py-3 bg-[#121212] border border-[#242424] rounded-lg focus:outline-none focus:border-[#D23369] text-white text-xs font-semibold transition-all font-sans"
                       placeholder="Ej. Bella Derma Spa"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">Tu Nombre Completo</label>
+                      <label className="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-1 font-syne">Tu Nombre Completo</label>
                       <input 
                         name="nombre_propietario"
                         type="text" 
                         required
                         value={leadForm.nombre_propietario}
                         onChange={e => setLeadForm(prev => ({ ...prev, nombre_propietario: e.target.value }))}
-                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-900 text-xs font-semibold transition-all"
+                        className="w-full px-4 py-3 bg-[#121212] border border-[#242424] rounded-lg focus:outline-none focus:border-[#D23369] text-white text-xs font-semibold transition-all font-sans"
                         placeholder="Ej. Ana Ruiz"
                       />
                     </div>
                     <div>
-                      <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">WhatsApp de Contacto</label>
+                      <label className="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-1 font-syne">WhatsApp de Contacto</label>
                       <input 
                         name="telefono"
                         type="tel" 
                         required
                         value={leadForm.telefono}
                         onChange={e => setLeadForm(prev => ({ ...prev, telefono: e.target.value }))}
-                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-900 text-xs font-semibold transition-all"
+                        className="w-full px-4 py-3 bg-[#121212] border border-[#242424] rounded-lg focus:outline-none focus:border-[#D23369] text-white text-xs font-semibold transition-all font-sans"
                         placeholder="Ej. +51 987 654 321"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">Correo Electrónico Comercial</label>
+                    <label className="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-1 font-syne">Correo Electrónico Comercial</label>
                     <input 
                       name="email"
                       type="email" 
                       required
                       value={leadForm.email}
                       onChange={e => setLeadForm(prev => ({ ...prev, email: e.target.value }))}
-                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-900 text-xs font-semibold transition-all"
+                      className="w-full px-4 py-3 bg-[#121212] border border-[#242424] rounded-lg focus:outline-none focus:border-[#D23369] text-white text-xs font-semibold transition-all font-sans"
                       placeholder="ana@belladerma.com"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">Plan Comercial Sugerido</label>
+                    <label className="block text-[8px] font-bold uppercase tracking-wider text-slate-400 mb-1 font-syne">Plan Comercial Sugerido</label>
                     <select 
                       name="plan_interes"
                       value={leadForm.plan_interes}
                       onChange={e => setLeadForm(prev => ({ ...prev, plan_interes: e.target.value }))}
-                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-950 text-xs font-extrabold transition-all cursor-pointer"
+                      className="w-full px-4 py-3 bg-[#121212] border border-[#242424] rounded-lg focus:outline-none focus:border-[#D23369] text-white text-xs font-extrabold transition-all cursor-pointer font-sans"
                     >
                       <option value="Plan Inicial">Plan Inicial ($79 USD/mes)</option>
                       <option value="Plan Pro">Plan Pro ($149 USD/mes) - Recomendado</option>
@@ -779,130 +796,127 @@ export default function LandingPage() {
                   <button 
                     disabled={submittingLead}
                     type="submit"
-                    className="w-full mt-2 py-3.5 bg-sky-600 hover:bg-sky-700 text-white font-extrabold rounded-lg transition-all shadow-sm hover:shadow-md cursor-pointer flex items-center justify-center gap-2 text-xs uppercase tracking-wider"
+                    className="w-full mt-2 py-3.5 bg-[#D23369] hover:bg-[#C70039] text-white font-extrabold rounded-lg transition-all shadow-md hover:shadow-lg cursor-pointer flex items-center justify-center gap-2 text-xs uppercase tracking-wider font-syne hover:scale-[1.01] duration-200"
                   >
                     {submittingLead ? "Reservando Acceso..." : "Iniciar Prueba Gratuita de 30 Días 🚀"}
                   </button>
                 </form>
               ) : (
-                /* Éxito */
-                <div className="flex flex-col items-center justify-center p-6 text-center gap-4 relative z-10 animate-fade-in">
-                  <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-2xl shadow-sm">
+                <div className="flex flex-col items-center justify-center p-6 text-center gap-4 relative z-10 animate-fade-in select-none">
+                  <div className="w-14 h-14 rounded-full bg-emerald-500/10 text-[#10B981] border border-[#10B981]/20 flex items-center justify-center text-2xl shadow-sm">
                     ✓
                   </div>
                   <div>
-                    <h3 className="text-lg font-black text-slate-900 tracking-tight">¡Prueba Reservada Exitosamente!</h3>
-                    <p className="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-wider">Registrando analítica en Meta Pixel...</p>
+                    <h3 className="text-lg font-black text-white tracking-tight font-syne">¡Prueba Reservada Exitosamente!</h3>
+                    <p className="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-wider font-syne">Registrando conversión en Meta Pixel...</p>
                   </div>
-                  <div className="p-3 bg-emerald-50/40 border border-emerald-100 rounded-xl max-w-sm">
-                    <p className="text-xs text-emerald-800 font-medium leading-relaxed">
+                  <div className="p-3 bg-emerald-950/20 border border-[#10B981]/10 rounded-xl max-w-sm">
+                    <p className="text-xs text-[#10B981] font-semibold leading-relaxed">
                       Redirigiéndote de forma segura en 3 segundos al portal de creación de cuenta con tus datos pre-rellenados. ¡Prepárate para la experiencia GlowDesk!
                     </p>
                   </div>
-                  <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden mt-2">
+                  <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden mt-2">
                     <div className="h-full bg-emerald-500 animate-[loading-bar_3s_linear_infinite]" style={{ width: '100%' }} />
                   </div>
                 </div>
               )}
-
             </div>
           </div>
-
         </div>
       </section>
 
       {/* ========================================================
           6. SECCIÓN PLANES Y PRECIOS
           ======================================================== */}
-      <section id="planes" className="bg-slate-50/50 py-20 border-t border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
+      <section id="planes" className="bg-[#1A1A1A]/30 py-24 border-t border-b border-[#242424] relative">
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[10px] font-black text-sky-600 tracking-widest uppercase block mb-2">Precios del Software</span>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+            <span className="text-[9px] font-black text-[#D23369] tracking-widest uppercase block mb-2 font-syne">Precios de Suscripción</span>
+            <h2 className="text-3xl font-extrabold text-[#F8FAFC] tracking-tight font-syne">
               Un plan diseñado para cada volumen de negocio
             </h2>
-            <p className="text-slate-500 text-xs md:text-sm mt-3 font-medium">
-              Precios transparentes y predecibles. Cancela o cambia de plan en cualquier momento desde tu panel de administrador.
+            <p className="text-slate-400 text-xs md:text-sm mt-3 font-medium">
+              Precios transparentes y predecibles. Cancela o cambia de plan en cualquier momento.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Plan Inicial */}
-            <div className="p-8 rounded-2xl bg-white border border-slate-200 flex flex-col gap-6 relative group transition-all duration-300">
+            <div className="p-8 rounded-2xl bg-[#1A1A1A] border border-[#242424] flex flex-col gap-6 relative group transition-all duration-300 hover:border-slate-800">
               <div>
-                <span className="text-xs font-black text-slate-400 uppercase tracking-widest block">PLAN INICIAL</span>
+                <span className="text-xs font-black text-slate-500 uppercase tracking-widest block font-syne">PLAN INICIAL</span>
                 <div className="flex items-baseline gap-1 mt-2">
-                  <span className="text-3xl font-black text-slate-900">$79</span>
-                  <span className="text-xs text-slate-400 font-bold">USD/mes</span>
+                  <span className="text-3xl font-black text-white font-syne">$79</span>
+                  <span className="text-xs text-slate-500 font-bold font-syne">USD/mes</span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-2 font-medium">Diseñado para spas unipersonales y pequeños centros de estética en desarrollo.</p>
+                <p className="text-[11px] text-slate-400 mt-2 font-medium">Diseñado para spas unipersonales y pequeños centros de estética en desarrollo.</p>
               </div>
 
-              <div className="h-[1px] w-full bg-slate-100" />
+              <div className="h-[1px] w-full bg-[#242424]" />
 
-              <ul className="flex flex-col gap-3 text-xs font-medium text-slate-500 flex-1">
-                <li className="flex items-center gap-2"><span className="text-emerald-500 text-[11px] font-black">✓</span> 1 Plantilla estándar de recordatorios</li>
-                <li className="flex items-center gap-2 text-slate-400"><span className="text-slate-300 text-[11px] font-black">✕</span> WhatsApp Emisor del Spa (Línea propia)</li>
-                <li className="flex items-center gap-2 text-slate-400"><span className="text-slate-300 text-[11px] font-black">✕</span> Personalización de marca en colores corporativos</li>
-                <li className="flex items-center gap-2"><span className="text-emerald-500 text-[11px] font-black">✓</span> Registro básico de Ingresos e Historiales</li>
-                <li className="flex items-center gap-2"><span className="text-emerald-500 text-[11px] font-black">✓</span> Fichero unificado de Clientes</li>
+              <ul className="flex flex-col gap-3 text-xs font-medium text-slate-400 flex-1">
+                <li className="flex items-center gap-2"><span className="text-[#10B981] text-[11px] font-black">✓</span> 1 Plantilla estándar de recordatorios</li>
+                <li className="flex items-center gap-2 text-slate-650"><span className="text-slate-650 text-[11px] font-black">✕</span> WhatsApp Emisor del Spa (Línea propia)</li>
+                <li className="flex items-center gap-2 text-slate-650"><span className="text-slate-650 text-[11px] font-black">✕</span> Personalización de marca en colores corporativos</li>
+                <li className="flex items-center gap-2"><span className="text-[#10B981] text-[11px] font-black">✓</span> Registro básico de Ingresos e Historiales</li>
+                <li className="flex items-center gap-2"><span className="text-[#10B981] text-[11px] font-black">✓</span> Fichero unificado de Clientes</li>
               </ul>
 
-              <a href="#registro-prospecto" className="w-full text-center py-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-800 text-xs font-bold uppercase tracking-wider transition-all border border-slate-200">
+              <a href="#registro-prospecto" className="w-full text-center py-3 rounded-lg bg-[#121212] hover:bg-[#242424] text-slate-300 hover:text-white text-xs font-bold uppercase tracking-wider transition-all border border-[#242424] font-syne">
                 Iniciar Inicial
               </a>
             </div>
 
             {/* Plan Pro (Recomendado) */}
-            <div className="p-8 rounded-2xl bg-white border-2 border-sky-600 flex flex-col gap-6 relative shadow-md group transition-all duration-300">
-              <span className="absolute -top-3 right-6 bg-sky-600 text-white px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">RECOMENDADO</span>
+            <div className="p-8 rounded-2xl bg-[#1A1A1A] border-2 border-[#D23369] flex flex-col gap-6 relative shadow-md group transition-all duration-300 hover:scale-[1.02]">
+              <span className="absolute -top-3 right-6 bg-[#D23369] text-white px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest font-syne">RECOMENDADO</span>
               
               <div>
-                <span className="text-xs font-black text-sky-600 uppercase tracking-widest block">PLAN PRO</span>
+                <span className="text-xs font-black text-[#D23369] uppercase tracking-widest block font-syne">PLAN PRO</span>
                 <div className="flex items-baseline gap-1 mt-2">
-                  <span className="text-3xl font-black text-slate-900">$149</span>
-                  <span className="text-xs text-slate-400 font-bold">USD/mes</span>
+                  <span className="text-3xl font-black text-white font-syne">$149</span>
+                  <span className="text-xs text-slate-400 font-bold font-syne">USD/mes</span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-2 font-medium">Para salones consolidados que buscan automatizar asistencia y blindar su caja financiera.</p>
+                <p className="text-[11px] text-slate-450 mt-2 font-medium font-sans">Para salones consolidados que buscan automatizar asistencia y blindar su caja financiera.</p>
               </div>
 
-              <div className="h-[1px] w-full bg-slate-100" />
+              <div className="h-[1px] w-full bg-[#242424]" />
 
-              <ul className="flex flex-col gap-3 text-xs font-medium text-slate-600 flex-1">
-                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> 3 Plantillas personalizadas de recordatorios</li>
-                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> WhatsApp Emisor del Spa (Línea oficial de tu Spa)</li>
-                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> Personalización estética cromática en 1 Clic</li>
-                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> Multi-usuario con perfiles protegidos para estilistas</li>
-                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> Soporte técnico de onboarding prioritario</li>
+              <ul className="flex flex-col gap-3 text-xs font-medium text-slate-350 flex-1">
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> 3 Plantillas personalizadas de recordatorios</li>
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> WhatsApp Emisor del Spa (Línea oficial de tu Spa)</li>
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> Personalización estética cromática en 1 Clic</li>
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> Multi-usuario con perfiles protegidos para estilistas</li>
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> Soporte técnico de onboarding prioritario</li>
               </ul>
 
-              <a href="#registro-prospecto" className="w-full text-center py-3.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm">
+              <a href="#registro-prospecto" className="w-full text-center py-3.5 rounded-lg bg-[#D23369] hover:bg-[#C70039] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm font-syne">
                 Adquirir Plan Pro 🚀
               </a>
             </div>
 
             {/* Plan Élite */}
-            <div className="p-8 rounded-2xl bg-white border border-slate-200 flex flex-col gap-6 relative group transition-all duration-300">
+            <div className="p-8 rounded-2xl bg-[#1A1A1A] border border-[#242424] flex flex-col gap-6 relative group transition-all duration-300 hover:border-slate-800">
               <div>
-                <span className="text-xs font-black text-slate-400 uppercase tracking-widest block">PLAN ÉLITE</span>
+                <span className="text-xs font-black text-slate-500 uppercase tracking-widest block font-syne">PLAN ÉLITE</span>
                 <div className="flex items-baseline gap-1 mt-2">
-                  <span className="text-3xl font-black text-slate-900">$249</span>
-                  <span className="text-xs text-slate-400 font-bold">USD/mes</span>
+                  <span className="text-3xl font-black text-white font-syne">$249</span>
+                  <span className="text-xs text-slate-500 font-bold font-syne">USD/mes</span>
                 </div>
-                <p className="text-[11px] text-slate-500 mt-2 font-medium">Para cadenas de spas y salones grandes con alta rotación y flujo financiero complejo.</p>
+                <p className="text-[11px] text-slate-400 mt-2 font-medium">Para cadenas de spas y salones grandes con alta rotación y flujo financiero complejo.</p>
               </div>
 
-              <div className="h-[1px] w-full bg-slate-100" />
+              <div className="h-[1px] w-full bg-[#242424]" />
 
-              <ul className="flex flex-col gap-3 text-xs font-medium text-slate-500 flex-1">
-                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> Plantillas e integraciones de WhatsApp ilimitadas</li>
-                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> WhatsApp Emisor + Servidor dedicado estable</li>
-                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> Logos de marca personalizados y colores premium</li>
-                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> Control macroeconómico de sucursales unificado</li>
-                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> Asistencia y Onboarding corporativo 24/7</li>
+              <ul className="flex flex-col gap-3 text-xs font-medium text-slate-400 flex-1">
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> Plantillas e integraciones de WhatsApp ilimitadas</li>
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> WhatsApp Emisor + Servidor dedicado estable</li>
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> Logos de marca personalizados y colores premium</li>
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> Control macroeconómico de sucursales unificado</li>
+                <li className="flex items-center gap-2"><span className="text-[#D23369] text-[11px] font-black">✓</span> Asistencia y Onboarding corporativo 24/7</li>
               </ul>
 
-              <a href="#registro-prospecto" className="w-full text-center py-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-800 text-xs font-bold uppercase tracking-wider transition-all border border-slate-200">
+              <a href="#registro-prospecto" className="w-full text-center py-3 rounded-lg bg-[#121212] hover:bg-[#242424] text-slate-300 hover:text-white text-xs font-bold uppercase tracking-wider transition-all border border-[#242424] font-syne">
                 Iniciar Élite
               </a>
             </div>
@@ -911,17 +925,17 @@ export default function LandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-100 bg-white py-12 px-6 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-400 font-semibold select-none">
+      <footer className="border-t border-[#242424] bg-[#121212] py-12 px-6 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500 font-semibold select-none">
         <div className="flex items-center gap-3">
-          <span className="w-8 h-8 rounded-lg bg-sky-600 flex items-center justify-center text-white text-sm font-black">G</span>
+          <span className="w-8 h-8 rounded-lg bg-[#D23369] flex items-center justify-center text-white text-sm font-black font-syne">G</span>
           <div>
-            <span className="text-sm font-extrabold tracking-tight text-slate-900">GlowDesk</span>
-            <span className="text-[7px] font-black text-sky-600 block tracking-widest leading-none">BEAUTY CONTROL</span>
+            <span className="text-sm font-extrabold tracking-tight text-white font-syne">GlowDesk</span>
+            <span className="text-[7px] font-black text-[#D23369] block tracking-widest leading-none font-syne">BEAUTY CONTROL</span>
           </div>
         </div>
 
         <p className="text-center md:text-right font-medium">
-          © 2026 GlowDesk. Todos los derechos reservados. Desarrollado bajo los más altos estándares corporativos y de conversión digital.
+          © 2026 GlowDesk. Todos los derechos reservados. Desarrollado bajo la secuencia B2B y estándares estéticos de vanguardia.
         </p>
       </footer>
     </div>
