@@ -4,22 +4,20 @@ import {
   Play, 
   CheckCircle2, 
   Sparkles, 
-  Menu, 
   ArrowRight, 
   Lock, 
   Shield, 
   TrendingUp, 
   Smartphone, 
-  Users, 
-  Scissors, 
-  Database,
-  ArrowUpRight,
   Zap,
-  Star,
-  Check,
-  HelpCircle,
   Activity,
-  X
+  AlertTriangle,
+  ArrowUpRight,
+  TrendingDown,
+  Clock,
+  Scissors,
+  ChevronRight,
+  Check
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { registrarLead } from "@/app/actions/leads";
@@ -52,7 +50,7 @@ export default function LandingPage() {
   const [vslSlide, setVslSlide] = useState(0);
   const [vslProgress, setVslProgress] = useState(0);
 
-  // Pasos de la presentación interactiva de la VSL
+  // Pasos de la presentación interactiva de la VSL (Dolor, Consecuencia, Solución, Resultado, CTA)
   const vslSlides = [
     {
       title: "1. Control de Finanzas Macro (Dashboard)",
@@ -61,7 +59,7 @@ export default function LandingPage() {
       badge: "Finanzas Clarificadas",
       color: "from-cyan-500 to-blue-600",
       graphic: (
-        <div className="w-full h-full bg-slate-900 border border-cyan-500/20 rounded-2xl p-4 flex flex-col gap-3 shadow-inner relative overflow-hidden select-none">
+        <div className="w-full h-full bg-slate-900 border border-slate-800 rounded-2xl p-4 flex flex-col gap-3 shadow-inner relative overflow-hidden select-none">
           <div className="flex justify-between items-center border-b border-slate-800 pb-2">
             <span className="text-[10px] font-bold text-slate-400">DASHBOARD COMERCIAL</span>
             <span className="px-2 py-0.5 rounded-full text-[8px] font-black bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">REAL-TIME</span>
@@ -205,7 +203,6 @@ export default function LandingPage() {
       const { data: { session } } = await supabase.auth.getSession();
       if (session?.user) {
         setSessionActive(true);
-        // Buscar su nombre
         const { data } = await supabase
           .from("usuarios")
           .select("nombre")
@@ -226,13 +223,12 @@ export default function LandingPage() {
       const interval = setInterval(() => {
         setVslProgress(prev => {
           if (prev >= 100) {
-            // Avanzar automáticamente de diapositiva
             setVslSlide(curr => (curr + 1) % vslSlides.length);
             return 0;
           }
           return prev + 1;
         });
-      }, 95); // Cambia de slide cada 9.5 segundos
+      }, 95);
       return () => clearInterval(interval);
     }
   }, [vslStarted, vslSlide]);
@@ -252,7 +248,7 @@ export default function LandingPage() {
       setLeadSuccess(true);
       setSubmittingLead(false);
 
-      // Trackear evento conversión de Lead en Meta Pixel
+      // Trackear conversión de Lead en Meta Pixel
       trackMetaEvent("Lead", {
         plan: leadForm.plan_interes,
         salon: leadForm.nombre_salon,
@@ -273,400 +269,506 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950 overflow-x-hidden select-none">
+    <div className="min-h-screen bg-white text-slate-900 font-sans selection:bg-sky-500 selection:text-white overflow-x-hidden antialiased">
       {/* Meta Pixel Tracker Component */}
       <MetaPixel />
 
-      {/* Luces de fondo decorativas estilo A. Carrión */}
-      <div className="absolute top-0 left-1/4 w-[50%] h-[400px] rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none" />
-      <div className="absolute top-[800px] right-1/4 w-[40%] h-[350px] rounded-full bg-pink-500/5 blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-[400px] left-1/3 w-[45%] h-[400px] rounded-full bg-cyan-500/5 blur-[120px] pointer-events-none" />
-
       {/* BANNER SESIÓN ACTIVA DETECTADA */}
       {sessionActive && (
-        <div className="bg-gradient-to-r from-cyan-600 to-cyan-500 text-white py-2.5 px-4 text-xs font-bold text-center flex items-center justify-center gap-2 relative z-50 shadow-lg">
+        <div className="bg-sky-700 text-white py-2.5 px-4 text-xs font-bold text-center flex items-center justify-center gap-2 relative z-50 shadow-md">
           <Activity size={14} className="animate-pulse" />
           <span>¡Hola {userName || "de nuevo"}! Hemos detectado tu sesión de salón activa en este navegador.</span>
-          <Link href="/dashboard" className="underline hover:text-cyan-100 ml-1.5 flex items-center gap-0.5 bg-white/10 px-2 py-0.5 rounded-full border border-white/20">
+          <Link href="/dashboard" className="underline hover:text-sky-100 ml-1.5 flex items-center gap-0.5 bg-white/10 px-3 py-0.5 rounded-full border border-white/20">
             Ir al Dashboard Directo <ArrowRight size={12} />
           </Link>
         </div>
       )}
 
-      {/* HEADER DE NAVEGACIÓN */}
-      <header className="border-b border-slate-900 bg-slate-950/80 backdrop-blur-md sticky top-0 z-40 px-6 py-4 flex items-center justify-between max-w-7xl mx-auto w-full">
-        <div className="flex items-center gap-2.5">
-          <span className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white text-base font-black shadow-lg shadow-cyan-500/10">
+      {/* HEADER MINIMALISTA - ESTILO A. CARRIÓN */}
+      <header className="border-b border-slate-100 bg-white/95 backdrop-blur-md sticky top-0 z-45 px-6 py-4 max-w-7xl mx-auto w-full flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <span className="w-8 h-8 rounded-lg bg-sky-600 flex items-center justify-center text-white text-sm font-black shadow-sm">
             G
           </span>
           <div>
-            <span className="text-base font-black tracking-tight bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent">GlowDesk</span>
-            <span className="text-[8px] font-black text-cyan-400 block tracking-widest leading-none">BEAUTY CONTROL</span>
+            <span className="text-sm font-extrabold tracking-tight text-slate-900 block leading-tight">GlowDesk</span>
+            <span className="text-[7px] font-black text-sky-600 block tracking-widest leading-none">BEAUTY CONTROL</span>
           </div>
         </div>
 
-        <nav className="hidden md:flex items-center gap-8 text-xs font-bold text-slate-400 uppercase tracking-wider">
-          <a href="#beneficios" className="hover:text-cyan-400 transition-colors">Beneficios</a>
-          <a href="#vsl-demo" className="hover:text-cyan-400 transition-colors">Demo VSL</a>
-          <a href="#planes" className="hover:text-cyan-400 transition-colors">Planes</a>
-          <a href="#registro-prospecto" className="hover:text-cyan-400 transition-colors">Capturar Cupo</a>
+        <nav className="hidden md:flex items-center gap-8 text-[11px] font-bold text-slate-500 uppercase tracking-widest">
+          <a href="#dolor" className="hover:text-sky-600 transition-colors">El Problema</a>
+          <a href="#consecuencia" className="hover:text-sky-600 transition-colors">El Impacto</a>
+          <a href="#solucion" className="hover:text-sky-600 transition-colors">La Solución</a>
+          <a href="#resultados" className="hover:text-sky-600 transition-colors">Resultados</a>
+          <a href="#planes" className="hover:text-sky-600 transition-colors">Planes</a>
         </nav>
 
         <div className="flex items-center gap-3">
           <Link 
             href="/login" 
-            className="text-xs font-black px-4 py-2.5 rounded-xl text-slate-300 hover:text-white border border-slate-800 bg-slate-900/50 hover:bg-slate-900 transition-all"
+            className="text-[11px] font-bold uppercase tracking-widest px-4 py-2.5 rounded-lg text-slate-600 hover:text-slate-900 border border-slate-200 bg-slate-50/50 hover:bg-slate-50 transition-all"
           >
-            Ingresar al Panel
+            Ingresar
           </Link>
-          <Link 
+          <a 
             href="#registro-prospecto" 
-            className="text-xs font-black px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-white transition-all shadow-md shadow-cyan-500/10 hover:shadow-cyan-500/25 flex items-center gap-1.5"
+            className="text-[11px] font-extrabold uppercase tracking-widest px-4.5 py-2.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white transition-all shadow-sm flex items-center gap-1.5"
           >
-            Iniciar Gratis <Zap size={13} />
-          </Link>
+            Iniciar Gratis <Zap size={12} />
+          </a>
         </div>
       </header>
 
-      {/* HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-6 pt-16 pb-20 text-center relative z-10">
-        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 text-[10px] font-black uppercase tracking-widest mb-6 animate-fade-in">
-          <Sparkles size={11} className="animate-pulse" /> Optimizado para Salones y Spas de Alto Rendimiento
-        </div>
-        
-        <h1 className="text-4xl md:text-6xl font-black tracking-tight text-white max-w-4xl mx-auto leading-[1.08] mb-6">
-          Duplica la Retención y Controla las Ventas de tu Salón en <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Piloto Automático</span>
-        </h1>
-
-        <p className="text-sm md:text-lg text-slate-400 max-w-2xl mx-auto font-medium leading-relaxed mb-10">
-          El primer Software VIP con personalización de marca, recordatorios automáticos de WhatsApp que salen desde tu propio número, y control macro de caja libre de errores de vendedoras.
-        </p>
-
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a 
-            href="#vsl-demo" 
-            className="w-full sm:w-auto text-sm font-black px-7 py-4 rounded-2xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white transition-all shadow-xl shadow-cyan-500/25 flex items-center justify-center gap-2 group cursor-pointer hover:-translate-y-0.5"
-          >
-            Ver Video Demostrativo <Play size={15} fill="white" className="group-hover:translate-x-0.5 transition-transform" />
-          </a>
-          <a 
-            href="#registro-prospecto" 
-            className="w-full sm:w-auto text-sm font-black px-7 py-4 rounded-2xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-          >
-            Registrar mi Salón Ahora <ArrowUpRight size={15} />
-          </a>
-        </div>
-
-        {/* LOGOS / SOCIAL PROOF */}
-        <div className="mt-16 pt-10 border-t border-slate-900/60 max-w-5xl mx-auto flex flex-col items-center gap-4">
-          <span className="text-[10px] font-black uppercase text-slate-500 tracking-widest">TECNOLOGÍA REVOLUCIONARIA AVALADA POR MÁS DE 300 SALONES DE BELLEZA</span>
-          <div className="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 text-sm font-extrabold text-slate-600 tracking-wider">
-            <span className="hover:text-slate-400 transition-colors">GLOW STUDIOS</span>
-            <span className="hover:text-slate-400 transition-colors">BELLA DERMA SPA</span>
-            <span className="hover:text-slate-400 transition-colors">PELUQUERÍA D'LUXE</span>
-            <span className="hover:text-slate-400 transition-colors">VIP SALON EXPRESS</span>
+      {/* ========================================================
+          1. DOLOR (PAIN) - HERO SECTION
+          ======================================================== */}
+      <section id="dolor" className="max-w-7xl mx-auto px-6 pt-16 pb-20 border-b border-slate-100">
+        <div className="text-center max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-rose-700 text-[10px] font-black uppercase tracking-widest mb-6 animate-fade-in">
+            <AlertTriangle size={11} /> Diagnóstico Comercial de Estética
           </div>
-        </div>
-      </section>
+          
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tight text-slate-900 leading-[1.08] mb-6">
+            ¿Tu Spa realmente crece, o solo estás <span className="text-sky-600">trabajando el doble</span> para cubrir fugas silenciosas de dinero?
+          </h1>
 
-      {/* SECCIÓN VSL (VIDEO SALES LETTER) INTERACTIVA */}
-      <section id="vsl-demo" className="max-w-7xl mx-auto px-6 py-20 border-t border-slate-900">
-        <div className="text-center mb-12">
-          <h2 className="text-2xl md:text-4xl font-black text-white tracking-tight">
-            Demostración en Vivo: Cómo GlowDesk transforma tu Operación
-          </h2>
-          <p className="text-slate-400 text-xs md:text-sm max-w-xl mx-auto mt-2 font-medium">
-            Haz clic en el reproductor para iniciar nuestro tour de sistema virtual y conocer cada módulo clave en acción.
+          <p className="text-sm md:text-base text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed mb-12">
+            El caos operativo en la administración diaria es el enemigo invisible: estilistas inconformes por comisiones mal calculadas, recepcionistas cometiendo errores de caja, y horas tiradas a la basura intentando recordar citas por WhatsApp uno por uno.
           </p>
         </div>
 
-        {/* CONTENEDOR REPRODUCTOR VSL INTERACTIVO MOCKUP */}
-        <div className="max-w-4xl mx-auto bg-slate-950 border border-slate-800/80 rounded-3xl overflow-hidden shadow-2xl relative select-none">
-          {!vslStarted ? (
-            /* MINIATURA INICIAL DE VSL */
-            <div className="aspect-video w-full bg-slate-950 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
-              {/* Fondo abstracto */}
-              <div className="absolute inset-0 bg-gradient-to-br from-slate-950 to-cyan-950/20 opacity-80" />
-              <div className="absolute -top-[10%] left-[-10%] w-[40%] h-[40%] bg-cyan-500/10 rounded-full blur-[80px]" />
-              <div className="absolute -bottom-[10%] right-[-10%] w-[40%] h-[40%] bg-pink-500/10 rounded-full blur-[80px]" />
-
-              <div className="relative z-10 flex flex-col items-center gap-4">
-                <button 
-                  onClick={() => setVslStarted(true)}
-                  className="w-18 h-18 rounded-full bg-gradient-to-tr from-cyan-400 to-blue-500 hover:from-cyan-500 hover:to-blue-600 text-white flex items-center justify-center shadow-lg shadow-cyan-500/20 hover:shadow-cyan-500/40 hover:scale-105 active:scale-95 transition-all cursor-pointer relative"
-                >
-                  <Play size={26} fill="white" className="ml-1" />
-                  <span className="absolute -inset-1.5 rounded-full border border-cyan-400/30 animate-ping pointer-events-none" />
-                </button>
-
-                <div className="mt-3">
-                  <span className="px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 text-[9px] font-black uppercase tracking-wider border border-cyan-500/20">VSL INTERACTIVO</span>
-                  <h3 className="text-xl md:text-2xl font-black text-white tracking-tight mt-2.5">
-                    GlowDesk VIP Walkthrough & Product Presentation
-                  </h3>
-                  <p className="text-xs text-slate-400 mt-1.5 max-w-md font-medium">
-                    Mira en vivo las automatizaciones de WhatsApp de emisor único, personalización de colores armonizados y control multi-usuario.
-                  </p>
-                </div>
-              </div>
+        {/* Mosaico de Dolores (Pain Points) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6 max-w-6xl mx-auto">
+          <div className="p-6.5 rounded-xl border border-slate-100 bg-slate-50/30 flex flex-col gap-4">
+            <div className="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-sm">
+              01
             </div>
-          ) : (
-            /* REPRODUCTOR VSL CORRIENDO ACTIVO */
-            <div className="aspect-video w-full bg-slate-950 flex flex-col relative">
-              {/* Barra superior de reproducción */}
-              <div className="p-4 bg-slate-900/60 border-b border-slate-800 flex items-center justify-between text-[10px] font-bold text-slate-300">
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" />
-                  <span>DEMO EN REPRODUCCIÓN</span>
-                </div>
-                <span className="text-[9px] text-cyan-400 font-extrabold tracking-widest">
-                  {vslSlides[vslSlide].badge}
-                </span>
-              </div>
+            <h3 className="text-base font-extrabold text-slate-900">Comisiones Caóticas</h3>
+            <p className="text-xs text-slate-500 leading-relaxed font-medium">
+              Tus estilistas y colaboradores discuten por discrepancias en sus pagos al final del mes. La falta de cálculos automáticos mina la confianza de tu equipo de trabajo.
+            </p>
+          </div>
 
-              {/* Contenedor del contenido interactivo */}
-              <div className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
-                {/* Lado Izquierdo: Descripción interactiva de la característica */}
-                <div className="flex flex-col gap-3 justify-center">
-                  <span className="text-[10px] font-black text-cyan-400 tracking-wider block">MÓDULO DE LA PLATAFORMA</span>
-                  <h3 className="text-lg md:text-xl font-black text-white tracking-tight leading-tight">
-                    {vslSlides[vslSlide].title}
-                  </h3>
-                  <p className="text-[10px] md:text-xs text-slate-400 leading-relaxed font-medium">
-                    {vslSlides[vslSlide].desc}
-                  </p>
-                  
-                  {/* Botones de control del VSL */}
-                  <div className="flex items-center gap-2.5 mt-2">
-                    <button 
-                      onClick={() => {
-                        setVslSlide(curr => (curr - 1 + vslSlides.length) % vslSlides.length);
-                        setVslProgress(0);
-                      }}
-                      className="px-3 py-1.5 rounded bg-slate-900 border border-slate-800 hover:border-slate-700 text-[9px] font-extrabold text-slate-400 hover:text-white transition-all cursor-pointer"
-                    >
-                      Anterior
-                    </button>
-                    <button 
-                      onClick={() => {
-                        setVslSlide(curr => (curr + 1) % vslSlides.length);
-                        setVslProgress(0);
-                      }}
-                      className="px-3.5 py-1.5 rounded bg-cyan-500 hover:bg-cyan-600 text-slate-950 font-black text-[9px] transition-all cursor-pointer shadow-md shadow-cyan-500/10"
-                    >
-                      Siguiente Módulo
-                    </button>
-                  </div>
-                </div>
-
-                {/* Lado Derecho: Simulación interactiva del dashboard animada en HTML/CSS */}
-                <div className="relative aspect-video md:aspect-auto h-full flex items-center justify-center">
-                  {vslSlides[vslSlide].graphic}
-                </div>
-              </div>
-
-              {/* Controles de reproducción inferiores */}
-              <div className="bg-slate-900/80 p-4 border-t border-slate-800 flex flex-col gap-2 relative">
-                {/* Barra de progreso interactiva */}
-                <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden cursor-pointer" onClick={() => setVslProgress(0)}>
-                  <div 
-                    className="h-full bg-gradient-to-r from-cyan-400 to-blue-500 transition-all duration-100" 
-                    style={{ width: `${vslProgress}%` }}
-                  />
-                </div>
-                
-                <div className="flex justify-between items-center text-[9px] font-bold text-slate-500">
-                  <div className="flex items-center gap-3">
-                    <button 
-                      onClick={() => setVslStarted(false)}
-                      className="text-red-500 hover:underline cursor-pointer"
-                    >
-                      Detener Demo
-                    </button>
-                    <span>Tour paso {vslSlide + 1} de {vslSlides.length}</span>
-                  </div>
-                  <span>Reproducción Automática Activa</span>
-                </div>
-              </div>
+          <div className="p-6.5 rounded-xl border border-slate-100 bg-slate-50/30 flex flex-col gap-4">
+            <div className="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-sm">
+              02
             </div>
-          )}
+            <h3 className="text-base font-extrabold text-slate-900">Caja Descuadrada</h3>
+            <p className="text-xs text-slate-500 leading-relaxed font-medium">
+              Ventas de productos que no se descuentan del inventario, descuentos informales otorgados en recepción y dinero en efectivo que desaparece sin explicaciones contables claras.
+            </p>
+          </div>
+
+          <div className="p-6.5 rounded-xl border border-slate-100 bg-slate-50/30 flex flex-col gap-4">
+            <div className="w-10 h-10 rounded-lg bg-rose-50 text-rose-600 flex items-center justify-center font-bold text-sm">
+              03
+            </div>
+            <h3 className="text-base font-extrabold text-slate-900">El Abismo de los No-Shows</h3>
+            <p className="text-xs text-slate-500 leading-relaxed font-medium">
+              Clientes que reservan cabinas completas de estética y simplemente no asisten, dejándote con el personal pagado y bloqueando a clientes reales que sí deseaban pagar por el servicio.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* SECCIÓN CARACTERÍSTICAS / BENEFICIOS (GRILLA A. CARRIÓN STYLE) */}
-      <section id="beneficios" className="bg-slate-900/40 py-20 border-t border-slate-900 relative">
+      {/* ========================================================
+          2. CONSECUENCIA (CONSEQUENCE)
+          ======================================================== */}
+      <section id="consecuencia" className="bg-slate-50/50 py-20 border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-cyan-400 tracking-widest uppercase">TECNOLOGÍA DE VANGUARDIA</span>
-            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight mt-1.5">
-              Por qué los Salones y Spas más exitosos eligen GlowDesk
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-[10px] font-black text-rose-600 tracking-widest uppercase block mb-2">El Costo de No Actuar</span>
+            <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+              Ignorar estas ineficiencias tiene consecuencias severas e inevitables en tu negocio
             </h2>
-            <p className="text-slate-400 text-xs md:text-sm max-w-lg mx-auto mt-2 font-medium">
-              Diseñado con la rigurosidad corporativa y el toque VIP que exige un negocio de alta demanda.
+            <p className="text-slate-500 text-xs md:text-sm mt-3 font-medium">
+              No se trata solo de un desorden operativo; es un drenaje activo sobre el margen de ganancia real y el futuro de tu marca.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Beneficio 1 */}
-            <div className="p-6 rounded-3xl bg-slate-950/60 border border-slate-800/80 hover:border-cyan-500/20 transition-all duration-300 flex flex-col gap-4 group">
-              <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 text-cyan-400 flex items-center justify-center border border-cyan-500/10 group-hover:scale-105 transition-transform">
-                <Smartphone size={20} />
+          {/* Grilla de Consecuencias Directas */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            
+            {/* Consecuencia 1 */}
+            <div className="p-6 rounded-xl bg-white border border-slate-150 flex flex-col gap-4.5 shadow-sm">
+              <div className="text-rose-500 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+                <TrendingDown size={14} /> Fuga de Margen
               </div>
-              <h3 className="text-base font-black text-white group-hover:text-cyan-400 transition-colors">WhatsApp Emisor Propio</h3>
-              <p className="text-xs text-slate-400 font-medium leading-relaxed">
-                Envía confirmaciones automáticas directamente utilizando la línea oficial del Spa, afianzando la seriedad y confianza de tu marca.
+              <h3 className="text-sm font-extrabold text-slate-900">Pérdida del 35% de Rentabilidad</h3>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                Hasta un tercio de las utilidades netas mensuales de los salones tradicionales se escurren en comisiones duplicadas y fugas hormiga en caja.
               </p>
             </div>
 
-            {/* Beneficio 2 */}
-            <div className="p-6 rounded-3xl bg-slate-950/60 border border-slate-800/80 hover:border-pink-500/20 transition-all duration-300 flex flex-col gap-4 group">
-              <div className="w-12 h-12 rounded-2xl bg-pink-500/10 text-pink-400 flex items-center justify-center border border-pink-500/10 group-hover:scale-105 transition-transform">
-                <Sparkles size={20} />
+            {/* Consecuencia 2 */}
+            <div className="p-6 rounded-xl bg-white border border-slate-150 flex flex-col gap-4.5 shadow-sm">
+              <div className="text-rose-500 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+                <Clock size={14} /> Esclavitud Operativa
               </div>
-              <h3 className="text-base font-black text-white group-hover:text-pink-400 transition-colors">Personalización Cromática</h3>
-              <p className="text-xs text-slate-400 font-medium leading-relaxed">
-                Configura tu color institucional. La plataforma recalcula colores pasteles y sombras premium de forma matemática para toda la interfaz.
+              <h3 className="text-sm font-extrabold text-slate-900">15+ Horas Semanales Perdidas</h3>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                Pasar los domingos por la noche persiguiendo a las vendedoras o cuadrando en Excel en lugar de centrarte en abrir nuevas sedes del Spa.
               </p>
             </div>
 
-            {/* Beneficio 3 */}
-            <div className="p-6 rounded-3xl bg-slate-950/60 border border-slate-800/80 hover:border-blue-500/20 transition-all duration-300 flex flex-col gap-4 group">
-              <div className="w-12 h-12 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center border border-blue-500/10 group-hover:scale-105 transition-transform">
-                <Shield size={20} />
+            {/* Consecuencia 3 */}
+            <div className="p-6 rounded-xl bg-white border border-slate-150 flex flex-col gap-4.5 shadow-sm">
+              <div className="text-rose-500 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+                <Shield size={14} /> Fuga de Clientes
               </div>
-              <h3 className="text-base font-black text-white group-hover:text-blue-400 transition-colors">Roles de Caja Protegidos</h3>
-              <p className="text-xs text-slate-400 font-medium leading-relaxed">
-                Tus recepcionistas operan la facturación diaria con restricciones visuales totales. El panel macro de utilidades es de acceso exclusivo tuyo.
+              <h3 className="text-sm font-extrabold text-slate-900">Migración hacia Competidores</h3>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                Los clientes VIP buscan puntualidad y seriedad. Si tu sistema de reservas se siente manual e informal, se irán con spas que operan digitalmente.
               </p>
             </div>
 
-            {/* Beneficio 4 */}
-            <div className="p-6 rounded-3xl bg-slate-950/60 border border-slate-800/80 hover:border-emerald-500/20 transition-all duration-300 flex flex-col gap-4 group">
-              <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center border border-emerald-500/10 group-hover:scale-105 transition-transform">
-                <TrendingUp size={20} />
+            {/* Consecuencia 4 */}
+            <div className="p-6 rounded-xl bg-white border border-slate-150 flex flex-col gap-4.5 shadow-sm">
+              <div className="text-rose-500 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider">
+                <Lock size={14} /> Vulnerabilidad Total
               </div>
-              <h3 className="text-base font-black text-white group-hover:text-emerald-400 transition-colors">Venta Cruzada Inteligente</h3>
-              <p className="text-xs text-slate-400 font-medium leading-relaxed">
-                Eleva el ticket de compra promedio gracias a las recomendaciones atómicas de servicios complementarios y promociones durante el registro.
+              <h3 className="text-sm font-extrabold text-slate-900">Acceso Financiero sin Filtros</h3>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed">
+                Dejar toda tu información de utilidades macro y base de datos de clientes al alcance de cualquier recepcionista temporal de tu negocio.
               </p>
             </div>
+
           </div>
         </div>
       </section>
 
-      {/* FORMULARIO DE CAPTURA DE LEADS (META ADS FOCUS) */}
-      <section id="registro-prospecto" className="max-w-7xl mx-auto px-6 py-20 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Lado Izquierdo: Pitch Comercial */}
-          <div className="lg:col-span-6 flex flex-col gap-5">
-            <span className="px-2.5 py-1 rounded bg-cyan-500/10 text-cyan-400 text-[9px] font-black uppercase tracking-wider border border-cyan-500/20 w-fit">
-              OFERTA EXCLUSIVA META ADS
-            </span>
-            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight leading-[1.12]">
-              Comienza tu Prueba Gratuita de 30 Días sin Compromisos
+      {/* ========================================================
+          3. SOLUCIÓN (SOLUTION)
+          ======================================================== */}
+      <section id="solucion" className="py-20 border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-[10px] font-black text-sky-600 tracking-widest uppercase block mb-2">La Alternativa Inteligente</span>
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+              Presentamos GlowDesk: El Sistema de Operación y Control VIP para Spas
             </h2>
-            <p className="text-slate-400 text-xs md:text-sm font-medium leading-relaxed">
-              Reserva tu acceso de demostración hoy mismo. Te brindaremos asistencia inmediata para integrar la API de WhatsApp de tu salón y adaptarla a tus colores corporativos. No requerimos tarjeta de crédito.
+            <p className="text-slate-500 text-xs md:text-sm mt-3 font-medium">
+              Diseñado minuciosamente para eliminar los cuellos de botella contables, automatizar la asistencia del cliente, y darte control absoluto sin importar dónde te encuentres físicamente.
+            </p>
+          </div>
+
+          {/* DEMO REPRODUCTOR INTERACTIVO SIMULADO */}
+          <div className="max-w-4xl mx-auto bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden shadow-xl mb-16 select-none text-slate-100">
+            {!vslStarted ? (
+              /* Miniatura inicial */
+              <div className="aspect-video w-full bg-slate-950 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-slate-950 to-sky-950/20 opacity-80" />
+                <div className="absolute -top-[10%] left-[-10%] w-[40%] h-[40%] bg-sky-500/10 rounded-full blur-[80px]" />
+                
+                <div className="relative z-10 flex flex-col items-center gap-4">
+                  <button 
+                    onClick={() => setVslStarted(true)}
+                    className="w-16 h-16 rounded-full bg-sky-600 hover:bg-sky-700 text-white flex items-center justify-center shadow-lg hover:scale-105 transition-all cursor-pointer relative"
+                  >
+                    <Play size={22} fill="white" className="ml-1" />
+                    <span className="absolute -inset-1.5 rounded-full border border-sky-400/30 animate-ping pointer-events-none" />
+                  </button>
+
+                  <div className="mt-2">
+                    <span className="px-2.5 py-1 rounded bg-sky-500/15 text-sky-400 text-[9px] font-black uppercase tracking-wider border border-sky-500/20">TOUR DE PRODUCTO</span>
+                    <h3 className="text-lg md:text-xl font-black text-white tracking-tight mt-2.5">
+                      Explora la Interfaz de GlowDesk en un Clic
+                    </h3>
+                    <p className="text-xs text-slate-400 mt-1 max-w-sm font-medium">
+                      Descubre cómo se automatizan los mensajes con tu emisor propio, la blindación de caja, y la personalización cromática del Spa.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              /* Reproductor VSL Activo */
+              <div className="aspect-video w-full bg-slate-950 flex flex-col relative">
+                <div className="p-4 bg-slate-900/60 border-b border-slate-800 flex items-center justify-between text-[10px] font-bold text-slate-300">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                    <span>DEMOSTRACIÓN ACTIVA</span>
+                  </div>
+                  <span className="text-[9px] text-sky-400 font-extrabold tracking-widest uppercase">
+                    {vslSlides[vslSlide].badge}
+                  </span>
+                </div>
+
+                <div className="flex-1 p-6 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                  <div className="flex flex-col gap-3 justify-center text-left">
+                    <span className="text-[9px] font-black text-sky-400 tracking-widest block uppercase">MÓDULO DE CONTROL</span>
+                    <h3 className="text-base md:text-lg font-black text-white tracking-tight leading-snug">
+                      {vslSlides[vslSlide].title}
+                    </h3>
+                    <p className="text-[10px] md:text-xs text-slate-400 leading-relaxed font-medium">
+                      {vslSlides[vslSlide].desc}
+                    </p>
+                    
+                    <div className="flex items-center gap-2.5 mt-2">
+                      <button 
+                        onClick={() => {
+                          setVslSlide(curr => (curr - 1 + vslSlides.length) % vslSlides.length);
+                          setVslProgress(0);
+                        }}
+                        className="px-3 py-1.5 rounded bg-slate-900 border border-slate-800 hover:border-slate-700 text-[9px] font-extrabold text-slate-400 hover:text-white transition-all cursor-pointer"
+                      >
+                        Anterior
+                      </button>
+                      <button 
+                        onClick={() => {
+                          setVslSlide(curr => (curr + 1) % vslSlides.length);
+                          setVslProgress(0);
+                        }}
+                        className="px-3.5 py-1.5 rounded bg-sky-600 hover:bg-sky-700 text-white font-extrabold text-[9px] transition-all cursor-pointer shadow-sm"
+                      >
+                        Siguiente Módulo
+                      </button>
+                    </div>
+                  </div>
+
+                  <div className="relative h-full flex items-center justify-center">
+                    {vslSlides[vslSlide].graphic}
+                  </div>
+                </div>
+
+                {/* Barra de progreso */}
+                <div className="bg-slate-900/80 p-4 border-t border-slate-800 flex flex-col gap-2">
+                  <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden cursor-pointer" onClick={() => setVslProgress(0)}>
+                    <div 
+                      className="h-full bg-sky-500 transition-all duration-100" 
+                      style={{ width: `${vslProgress}%` }}
+                    />
+                  </div>
+                  <div className="flex justify-between items-center text-[9px] font-bold text-slate-500">
+                    <div className="flex items-center gap-3">
+                      <button onClick={() => setVslStarted(false)} className="text-red-500 hover:underline cursor-pointer">
+                        Cerrar Demo
+                      </button>
+                      <span>Módulo {vslSlide + 1} de {vslSlides.length}</span>
+                    </div>
+                    <span>Avance Automático Activo</span>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Tres Pilares Corporativos de la Solución */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            
+            {/* Pilar 1 */}
+            <div className="flex gap-4 group">
+              <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100">
+                <Smartphone size={18} />
+              </div>
+              <div>
+                <h4 className="text-sm font-extrabold text-slate-900 mb-1.5">WhatsApp Emisor Proporcional</h4>
+                <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                  Los recordatorios y confirmaciones automáticas de reservas se despachan directamente utilizando tu propio número comercial configurado de tu Spa, garantizando seriedad al cliente final.
+                </p>
+              </div>
+            </div>
+
+            {/* Pilar 2 */}
+            <div className="flex gap-4 group">
+              <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100">
+                <Sparkles size={18} />
+              </div>
+              <div>
+                <h4 className="text-sm font-extrabold text-slate-900 mb-1.5">Personalización Estética Corporativa</h4>
+                <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                  Modifica el tono de marca e introduce tus códigos de color. La plataforma calcula automáticamente variables pasteles ideales y hovers armoniosos que lucen VIP y profesionales.
+                </p>
+              </div>
+            </div>
+
+            {/* Pilar 3 */}
+            <div className="flex gap-4 group">
+              <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0 border border-sky-100">
+                <Lock size={18} />
+              </div>
+              <div>
+                <h4 className="text-sm font-extrabold text-slate-900 mb-1.5">Aislamiento de Roles y Caja Blindada</h4>
+                <p className="text-xs text-slate-500 leading-relaxed font-medium">
+                  Asigna accesos con privilegios reducidos a recepcionistas y estilistas. Ellos solo capturan ingresos y egresos ordinarios; tú dominas la rentabilidad neta a nivel macro.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================
+          4. RESULTADOS (RESULTS)
+          ======================================================== */}
+      <section id="resultados" className="bg-slate-50/50 py-20 border-b border-slate-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-[10px] font-black text-sky-600 tracking-widest uppercase block mb-2">Métricas e Impacto Real</span>
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+              Los resultados medibles que obtienes desde los primeros 30 días
+            </h2>
+            <p className="text-slate-500 text-xs md:text-sm mt-3 font-medium">
+              GlowDesk no es solo software de administración; es el motor que incrementa la asistencia y blinda la caja de tu Spa.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto text-center">
+            
+            {/* Stat 1 */}
+            <div className="p-6 rounded-xl bg-white border border-slate-150 shadow-sm flex flex-col gap-2">
+              <span className="text-4xl md:text-5xl font-black text-sky-600 block">-80%</span>
+              <span className="text-xs font-black text-slate-900 uppercase tracking-widest">En No-Shows</span>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed mt-1">
+                La mensajería automatizada desde tu propio emisor de WhatsApp hace casi imposible que los clientes olviden asistir a su servicio agendado.
+              </p>
+            </div>
+
+            {/* Stat 2 */}
+            <div className="p-6 rounded-xl bg-white border border-slate-150 shadow-sm flex flex-col gap-2">
+              <span className="text-4xl md:text-5xl font-black text-sky-600 block">+35%</span>
+              <span className="text-xs font-black text-slate-900 uppercase tracking-widest">Retención Comercial</span>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed mt-1">
+                El seguimiento post-servicio automatizado incrementa las visitas de tus clientes recurrentes sin requerir esfuerzo de tu personal.
+              </p>
+            </div>
+
+            {/* Stat 3 */}
+            <div className="p-6 rounded-xl bg-white border border-slate-150 shadow-sm flex flex-col gap-2">
+              <span className="text-4xl md:text-5xl font-black text-sky-600 block">0%</span>
+              <span className="text-xs font-black text-slate-900 uppercase tracking-widest">Errores de Caja</span>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed mt-1">
+                Cuadres al centavo, cálculo matemático instantáneo de comisiones de estilistas y reportes en tiempo real libres de manipulación humana.
+              </p>
+            </div>
+
+            {/* Stat 4 */}
+            <div className="p-6 rounded-xl bg-white border border-slate-150 shadow-sm flex flex-col gap-2">
+              <span className="text-4xl md:text-5xl font-black text-sky-600 block">+15hs</span>
+              <span className="text-xs font-black text-slate-900 uppercase tracking-widest">Libres por Semana</span>
+              <p className="text-xs text-slate-500 font-medium leading-relaxed mt-1">
+                Recupera tu tiempo libre de fines de semana. Automatiza y delega el spa con la absoluta certeza de que tus finanzas están seguras.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ========================================================
+          5. CTA (CALL TO ACTION) & FORMULARIO
+          ======================================================== */}
+      <section id="registro-prospecto" className="py-20 max-w-7xl mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center max-w-6xl mx-auto">
+          
+          {/* Lado Izquierdo Pitch de Cierre */}
+          <div className="lg:col-span-6 flex flex-col gap-5 text-left">
+            <span className="px-2.5 py-1 rounded bg-sky-50 border border-sky-100 text-sky-700 text-[10px] font-black uppercase tracking-widest w-fit">
+              OFERTA DE ACCESO INICIAL Limitada
+            </span>
+            
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-slate-900 tracking-tight leading-[1.1]">
+              Reclama tu Acceso Gratuito de 30 Días & Transforma tu Spa Hoy Mismo
+            </h2>
+
+            <p className="text-slate-500 text-xs md:text-sm font-medium leading-relaxed">
+              No dejes que tu negocio continúe sangrando ganancias de forma silenciosa. Te ayudamos a integrar tu propia API comercial de WhatsApp y configurar tus colores de marca en menos de 24 horas. Sin tarjetas de crédito, cancela cuando quieras.
             </p>
 
-            <div className="flex flex-col gap-3.5 mt-3">
-              <div className="flex items-center gap-3">
-                <span className="w-6 h-6 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-[10px] font-black">✓</span>
-                <span className="text-xs font-bold text-slate-300">Acceso total sin restricciones al Plan Pro</span>
+            <div className="flex flex-col gap-3 mt-3">
+              <div className="flex items-center gap-2.5">
+                <span className="w-5 h-5 rounded bg-sky-50 text-sky-600 flex items-center justify-center text-[10px] font-bold border border-sky-100">✓</span>
+                <span className="text-xs font-extrabold text-slate-700">Acceso completo sin límites al Plan Pro</span>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="w-6 h-6 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-[10px] font-black">✓</span>
-                <span className="text-xs font-bold text-slate-300">Configuración de marca HSL ilimitada</span>
+              <div className="flex items-center gap-2.5">
+                <span className="w-5 h-5 rounded bg-sky-50 text-sky-600 flex items-center justify-center text-[10px] font-bold border border-sky-100">✓</span>
+                <span className="text-xs font-extrabold text-slate-700">Configuración estética corporativa ilimitada</span>
               </div>
-              <div className="flex items-center gap-3">
-                <span className="w-6 h-6 rounded-lg bg-cyan-500/10 border border-cyan-500/20 text-cyan-400 flex items-center justify-center text-[10px] font-black">✓</span>
-                <span className="text-xs font-bold text-slate-300">Asistencia técnica premium para tu WhatsApp Emisor</span>
+              <div className="flex items-center gap-2.5">
+                <span className="w-5 h-5 rounded bg-sky-50 text-sky-600 flex items-center justify-center text-[10px] font-bold border border-sky-100">✓</span>
+                <span className="text-xs font-extrabold text-slate-700">Asistencia técnica prioritaria de integración de WhatsApp</span>
               </div>
             </div>
           </div>
 
-          {/* Lado Derecho: Tarjeta de Formulario Glassmorphism */}
+          {/* Lado Derecho Tarjeta de Captura Minimalista */}
           <div className="lg:col-span-6">
-            <div className="bg-slate-950/70 border border-slate-800/80 p-8 rounded-3xl shadow-2xl relative overflow-hidden backdrop-blur-xl">
+            <div className="bg-white border border-slate-200 p-8 rounded-2xl shadow-lg relative overflow-hidden">
               
-              {/* Luces de la tarjeta */}
-              <div className="absolute top-0 right-0 w-[40%] h-[40%] rounded-full bg-cyan-500/5 blur-[40px] pointer-events-none" />
-
               {!leadSuccess ? (
-                /* MOSTRAR FORMULARIO */
-                <form className="flex flex-col gap-4 relative z-10" onSubmit={handleLeadSubmit}>
+                <form className="flex flex-col gap-4.5 relative z-10" onSubmit={handleLeadSubmit}>
                   <div className="text-center mb-2">
-                    <h3 className="text-lg font-black text-white tracking-tight">Capturar mi Demo Gratis</h3>
-                    <p className="text-slate-500 text-[10px] mt-0.5 font-bold uppercase tracking-wider">ÚNICAS VACANTES ANTES DEL LANZAMIENTO OFICIAL</p>
+                    <h3 className="text-lg font-black text-slate-900 tracking-tight">Solicitar mi Demostración Gratis</h3>
+                    <p className="text-slate-400 text-[9px] mt-0.5 font-extrabold uppercase tracking-wider">REGISTRO INMEDIATO SIN COMPROMISOS</p>
                   </div>
 
                   {leadError && (
-                    <div className="p-3.5 bg-red-950/40 border border-red-500/20 text-red-300 text-xs font-bold rounded-2xl text-center">
+                    <div className="p-3 bg-rose-50 border border-rose-100 text-rose-800 text-xs font-bold rounded-lg text-center">
                       {leadError}
                     </div>
                   )}
 
                   <div>
-                    <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Nombre Comercial de tu Salón</label>
+                    <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">Nombre Comercial de tu Salón/Spa</label>
                     <input 
                       name="nombre_salon"
                       type="text" 
                       required
                       value={leadForm.nombre_salon}
                       onChange={e => setLeadForm(prev => ({ ...prev, nombre_salon: e.target.value }))}
-                      className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 text-white text-xs font-medium transition-all"
+                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-900 text-xs font-semibold transition-all"
                       placeholder="Ej. Bella Derma Spa"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Tu Nombre Propietario</label>
+                      <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">Tu Nombre Completo</label>
                       <input 
                         name="nombre_propietario"
                         type="text" 
                         required
                         value={leadForm.nombre_propietario}
                         onChange={e => setLeadForm(prev => ({ ...prev, nombre_propietario: e.target.value }))}
-                        className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 text-white text-xs font-medium transition-all"
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-900 text-xs font-semibold transition-all"
                         placeholder="Ej. Ana Ruiz"
                       />
                     </div>
                     <div>
-                      <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">WhatsApp de Contacto</label>
+                      <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">WhatsApp de Contacto</label>
                       <input 
                         name="telefono"
                         type="tel" 
                         required
                         value={leadForm.telefono}
                         onChange={e => setLeadForm(prev => ({ ...prev, telefono: e.target.value }))}
-                        className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 text-white text-xs font-medium transition-all"
+                        className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-900 text-xs font-semibold transition-all"
                         placeholder="Ej. +51 987 654 321"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Correo Electrónico Corporativo</label>
+                    <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">Correo Electrónico Comercial</label>
                     <input 
                       name="email"
                       type="email" 
                       required
                       value={leadForm.email}
                       onChange={e => setLeadForm(prev => ({ ...prev, email: e.target.value }))}
-                      className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:outline-none focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500/30 text-white text-xs font-medium transition-all"
+                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-900 text-xs font-semibold transition-all"
                       placeholder="ana@belladerma.com"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-[10px] font-black uppercase tracking-wider text-slate-400 mb-1">Plan Comercial de Interés</label>
+                    <label className="block text-[9px] font-black uppercase tracking-wider text-slate-500 mb-1">Plan Comercial Sugerido</label>
                     <select 
                       name="plan_interes"
                       value={leadForm.plan_interes}
                       onChange={e => setLeadForm(prev => ({ ...prev, plan_interes: e.target.value }))}
-                      className="w-full px-4 py-3 bg-slate-900 border border-slate-800 rounded-xl focus:outline-none focus:border-cyan-500 text-white text-xs font-bold transition-all cursor-pointer"
+                      className="w-full px-4 py-3 bg-slate-50/50 border border-slate-200 rounded-lg focus:outline-none focus:border-sky-500 text-slate-950 text-xs font-extrabold transition-all cursor-pointer"
                     >
                       <option value="Plan Inicial">Plan Inicial ($79 USD/mes)</option>
                       <option value="Plan Pro">Plan Pro ($149 USD/mes) - Recomendado</option>
@@ -677,27 +779,27 @@ export default function LandingPage() {
                   <button 
                     disabled={submittingLead}
                     type="submit"
-                    className="w-full mt-2 py-3.5 bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-extrabold rounded-xl transition-all shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/35 cursor-pointer flex items-center justify-center gap-2 hover:-translate-y-0.5 active:translate-y-0 text-xs uppercase tracking-wider"
+                    className="w-full mt-2 py-3.5 bg-sky-600 hover:bg-sky-700 text-white font-extrabold rounded-lg transition-all shadow-sm hover:shadow-md cursor-pointer flex items-center justify-center gap-2 text-xs uppercase tracking-wider"
                   >
-                    {submittingLead ? "Reservando Cupo..." : "Reservar mi Demo Gratis & Activar WhatsApp 🚀"}
+                    {submittingLead ? "Reservando Acceso..." : "Iniciar Prueba Gratuita de 30 Días 🚀"}
                   </button>
                 </form>
               ) : (
-                /* MOSTRAR PANTALLA ÉXITO DE CAPTURA LEADS */
-                <div className="flex flex-col items-center justify-center p-6 text-center gap-4 relative z-10 animate-fade-in select-none">
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl shadow-lg">
+                /* Éxito */
+                <div className="flex flex-col items-center justify-center p-6 text-center gap-4 relative z-10 animate-fade-in">
+                  <div className="w-14 h-14 rounded-full bg-emerald-50 text-emerald-600 border border-emerald-100 flex items-center justify-center text-2xl shadow-sm">
                     ✓
                   </div>
                   <div>
-                    <h3 className="text-xl font-black text-white tracking-tight">¡Cupo Reservado Exitosamente!</h3>
-                    <p className="text-slate-400 text-xs font-semibold mt-1">Registrando conversión en Meta Pixel...</p>
+                    <h3 className="text-lg font-black text-slate-900 tracking-tight">¡Prueba Reservada Exitosamente!</h3>
+                    <p className="text-slate-400 text-[10px] font-bold mt-0.5 uppercase tracking-wider">Registrando analítica en Meta Pixel...</p>
                   </div>
-                  <div className="p-3 bg-emerald-950/40 border border-emerald-500/10 rounded-2xl max-w-sm">
-                    <p className="text-[10px] text-emerald-300 font-bold leading-normal">
+                  <div className="p-3 bg-emerald-50/40 border border-emerald-100 rounded-xl max-w-sm">
+                    <p className="text-xs text-emerald-800 font-medium leading-relaxed">
                       Redirigiéndote de forma segura en 3 segundos al portal de creación de cuenta con tus datos pre-rellenados. ¡Prepárate para la experiencia GlowDesk!
                     </p>
                   </div>
-                  <div className="w-full h-1 bg-slate-800 rounded-full overflow-hidden mt-2">
+                  <div className="w-full h-1 bg-slate-100 rounded-full overflow-hidden mt-2">
                     <div className="h-full bg-emerald-500 animate-[loading-bar_3s_linear_infinite]" style={{ width: '100%' }} />
                   </div>
                 </div>
@@ -709,97 +811,99 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* SECCIÓN PLANES Y PRECIOS */}
-      <section id="planes" className="bg-slate-900/40 py-20 border-t border-slate-900 relative">
+      {/* ========================================================
+          6. SECCIÓN PLANES Y PRECIOS
+          ======================================================== */}
+      <section id="planes" className="bg-slate-50/50 py-20 border-t border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <span className="text-[10px] font-black text-cyan-400 tracking-widest uppercase">TARIFAS DE SUSCRIPCIÓN</span>
-            <h2 className="text-3xl md:text-4xl font-black text-white tracking-tight mt-1.5">
-              Un plan diseñado para cada etapa de tu negocio
+          <div className="text-center max-w-3xl mx-auto mb-16">
+            <span className="text-[10px] font-black text-sky-600 tracking-widest uppercase block mb-2">Precios del Software</span>
+            <h2 className="text-3xl font-black text-slate-900 tracking-tight">
+              Un plan diseñado para cada volumen de negocio
             </h2>
-            <p className="text-slate-400 text-xs md:text-sm max-w-lg mx-auto mt-2 font-medium">
-              Precios transparentes y sin sorpresas. Cancela o cambia de plan en cualquier momento.
+            <p className="text-slate-500 text-xs md:text-sm mt-3 font-medium">
+              Precios transparentes y predecibles. Cancela o cambia de plan en cualquier momento desde tu panel de administrador.
             </p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Plan Inicial */}
-            <div className="p-8 rounded-3xl bg-slate-950/70 border border-slate-850 flex flex-col gap-6 relative group hover:border-slate-800 transition-all duration-300">
+            <div className="p-8 rounded-2xl bg-white border border-slate-200 flex flex-col gap-6 relative group transition-all duration-300">
               <div>
-                <span className="text-xs font-extrabold text-slate-400 uppercase tracking-widest block">PLAN INICIAL</span>
+                <span className="text-xs font-black text-slate-400 uppercase tracking-widest block">PLAN INICIAL</span>
                 <div className="flex items-baseline gap-1 mt-2">
-                  <span className="text-3xl font-black text-white">$79</span>
-                  <span className="text-xs text-slate-500 font-bold">USD/mes</span>
+                  <span className="text-3xl font-black text-slate-900">$79</span>
+                  <span className="text-xs text-slate-400 font-bold">USD/mes</span>
                 </div>
-                <p className="text-[10px] text-slate-500 mt-2 font-medium">Perfecto para spas unipersonales y pequeños salones que están despegando.</p>
+                <p className="text-[11px] text-slate-500 mt-2 font-medium">Diseñado para spas unipersonales y pequeños centros de estética en desarrollo.</p>
               </div>
 
-              <div className="h-[1px] w-full bg-slate-900" />
+              <div className="h-[1px] w-full bg-slate-100" />
 
-              <ul className="flex flex-col gap-3 text-xs font-bold text-slate-400 flex-1">
-                <li className="flex items-center gap-2"><span className="text-emerald-400 text-[10px]">✓</span> 1 Plantilla estándar de recordatorios</li>
-                <li className="flex items-center gap-2 text-slate-600"><span className="text-slate-700 text-[10px]">✕</span> WhatsApp Emisor del Spa (Deshabilitado)</li>
-                <li className="flex items-center gap-2 text-slate-600"><span className="text-slate-700 text-[10px]">✕</span> Personalización de colores de Marca</li>
-                <li className="flex items-center gap-2"><span className="text-emerald-400 text-[10px]">✓</span> Control de Caja Diario e Ingresos</li>
-                <li className="flex items-center gap-2"><span className="text-emerald-400 text-[10px]">✓</span> Registro básico de Clientes</li>
+              <ul className="flex flex-col gap-3 text-xs font-medium text-slate-500 flex-1">
+                <li className="flex items-center gap-2"><span className="text-emerald-500 text-[11px] font-black">✓</span> 1 Plantilla estándar de recordatorios</li>
+                <li className="flex items-center gap-2 text-slate-400"><span className="text-slate-300 text-[11px] font-black">✕</span> WhatsApp Emisor del Spa (Línea propia)</li>
+                <li className="flex items-center gap-2 text-slate-400"><span className="text-slate-300 text-[11px] font-black">✕</span> Personalización de marca en colores corporativos</li>
+                <li className="flex items-center gap-2"><span className="text-emerald-500 text-[11px] font-black">✓</span> Registro básico de Ingresos e Historiales</li>
+                <li className="flex items-center gap-2"><span className="text-emerald-500 text-[11px] font-black">✓</span> Fichero unificado de Clientes</li>
               </ul>
 
-              <a href="#registro-prospecto" className="w-full text-center py-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white text-xs font-black transition-all">
-                Empezar Inicial
+              <a href="#registro-prospecto" className="w-full text-center py-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-800 text-xs font-bold uppercase tracking-wider transition-all border border-slate-200">
+                Iniciar Inicial
               </a>
             </div>
 
             {/* Plan Pro (Recomendado) */}
-            <div className="p-8 rounded-3xl bg-slate-950 border-2 border-cyan-500 flex flex-col gap-6 relative shadow-xl shadow-cyan-500/5 group hover:-translate-y-1 transition-all duration-300">
-              <span className="absolute -top-3.5 right-6 bg-cyan-500 text-slate-950 px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">RECOMENDADO</span>
+            <div className="p-8 rounded-2xl bg-white border-2 border-sky-600 flex flex-col gap-6 relative shadow-md group transition-all duration-300">
+              <span className="absolute -top-3 right-6 bg-sky-600 text-white px-3 py-1 rounded-full text-[8px] font-black uppercase tracking-widest">RECOMENDADO</span>
               
               <div>
-                <span className="text-xs font-extrabold text-cyan-400 uppercase tracking-widest block">PLAN PRO</span>
+                <span className="text-xs font-black text-sky-600 uppercase tracking-widest block">PLAN PRO</span>
                 <div className="flex items-baseline gap-1 mt-2">
-                  <span className="text-4xl font-black text-white">$149</span>
+                  <span className="text-3xl font-black text-slate-900">$149</span>
                   <span className="text-xs text-slate-400 font-bold">USD/mes</span>
                 </div>
-                <p className="text-[10px] text-slate-400 mt-2 font-medium">Ideal para salones consolidados que buscan automatizar procesos y retener clientes.</p>
+                <p className="text-[11px] text-slate-500 mt-2 font-medium">Para salones consolidados que buscan automatizar asistencia y blindar su caja financiera.</p>
               </div>
 
-              <div className="h-[1px] w-full bg-slate-800" />
+              <div className="h-[1px] w-full bg-slate-100" />
 
-              <ul className="flex flex-col gap-3 text-xs font-bold text-slate-300 flex-1">
-                <li className="flex items-center gap-2"><span className="text-cyan-400 text-[10px]">✓</span> Hasta 3 Plantillas personalizadas de citas</li>
-                <li className="flex items-center gap-2"><span className="text-cyan-400 text-[10px]">✓</span> WhatsApp Emisor del Spa (Línea propia)</li>
-                <li className="flex items-center gap-2"><span className="text-cyan-400 text-[10px]">✓</span> Personalización de colores de Marca</li>
-                <li className="flex items-center gap-2"><span className="text-cyan-400 text-[10px]">✓</span> Control de Caja, Finanzas e Historiales</li>
-                <li className="flex items-center gap-2"><span className="text-cyan-400 text-[10px]">✓</span> Multi-usuario (Cuentas de Vendedoras/Estilistas)</li>
+              <ul className="flex flex-col gap-3 text-xs font-medium text-slate-600 flex-1">
+                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> 3 Plantillas personalizadas de recordatorios</li>
+                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> WhatsApp Emisor del Spa (Línea oficial de tu Spa)</li>
+                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> Personalización estética cromática en 1 Clic</li>
+                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> Multi-usuario con perfiles protegidos para estilistas</li>
+                <li className="flex items-center gap-2"><span className="text-sky-600 text-[11px] font-black">✓</span> Soporte técnico de onboarding prioritario</li>
               </ul>
 
-              <a href="#registro-prospecto" className="w-full text-center py-3.5 rounded-xl bg-cyan-500 hover:bg-cyan-600 text-slate-950 text-xs font-black transition-all shadow-md shadow-cyan-500/10">
+              <a href="#registro-prospecto" className="w-full text-center py-3.5 rounded-lg bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold uppercase tracking-wider transition-all shadow-sm">
                 Adquirir Plan Pro 🚀
               </a>
             </div>
 
             {/* Plan Élite */}
-            <div className="p-8 rounded-3xl bg-slate-950/70 border border-slate-850 flex flex-col gap-6 relative group hover:border-slate-800 transition-all duration-300">
+            <div className="p-8 rounded-2xl bg-white border border-slate-200 flex flex-col gap-6 relative group transition-all duration-300">
               <div>
-                <span className="text-xs font-extrabold text-purple-400 uppercase tracking-widest block">PLAN ÉLITE</span>
+                <span className="text-xs font-black text-slate-400 uppercase tracking-widest block">PLAN ÉLITE</span>
                 <div className="flex items-baseline gap-1 mt-2">
-                  <span className="text-3xl font-black text-white">$249</span>
-                  <span className="text-xs text-slate-500 font-bold">USD/mes</span>
+                  <span className="text-3xl font-black text-slate-900">$249</span>
+                  <span className="text-xs text-slate-400 font-bold">USD/mes</span>
                 </div>
-                <p className="text-[10px] text-slate-500 mt-2 font-medium">Pensado para grandes spas con alta rotación de personal y cadenas de salones.</p>
+                <p className="text-[11px] text-slate-500 mt-2 font-medium">Para cadenas de spas y salones grandes con alta rotación y flujo financiero complejo.</p>
               </div>
 
-              <div className="h-[1px] w-full bg-slate-900" />
+              <div className="h-[1px] w-full bg-slate-100" />
 
-              <ul className="flex flex-col gap-3 text-xs font-bold text-slate-400 flex-1">
-                <li className="flex items-center gap-2"><span className="text-purple-400 text-[10px]">✓</span> Plantillas de recordatorios ilimitadas</li>
-                <li className="flex items-center gap-2"><span className="text-purple-400 text-[10px]">✓</span> WhatsApp Emisor + Automatización total</li>
-                <li className="flex items-center gap-2"><span className="text-purple-400 text-[10px]">✓</span> Personalización ilimitada y logos corporativos</li>
-                <li className="flex items-center gap-2"><span className="text-purple-400 text-[10px]">✓</span> Dashboard Macroeconómico de Cadena</li>
-                <li className="flex items-center gap-2"><span className="text-purple-400 text-[10px]">✓</span> Asistencia y Soporte prioritario 24/7</li>
+              <ul className="flex flex-col gap-3 text-xs font-medium text-slate-500 flex-1">
+                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> Plantillas e integraciones de WhatsApp ilimitadas</li>
+                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> WhatsApp Emisor + Servidor dedicado estable</li>
+                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> Logos de marca personalizados y colores premium</li>
+                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> Control macroeconómico de sucursales unificado</li>
+                <li className="flex items-center gap-2"><span className="text-slate-900 text-[11px] font-black">✓</span> Asistencia y Onboarding corporativo 24/7</li>
               </ul>
 
-              <a href="#registro-prospecto" className="w-full text-center py-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white text-xs font-black transition-all">
-                Empezar Élite
+              <a href="#registro-prospecto" className="w-full text-center py-3 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-600 hover:text-slate-800 text-xs font-bold uppercase tracking-wider transition-all border border-slate-200">
+                Iniciar Élite
               </a>
             </div>
           </div>
@@ -807,17 +911,17 @@ export default function LandingPage() {
       </section>
 
       {/* FOOTER */}
-      <footer className="border-t border-slate-900 bg-slate-950 py-12 px-6 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-500 font-semibold select-none">
-        <div className="flex items-center gap-2.5">
-          <span className="w-8 h-8 rounded-lg bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center text-white text-sm font-black">G</span>
+      <footer className="border-t border-slate-100 bg-white py-12 px-6 max-w-7xl mx-auto w-full flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-slate-400 font-semibold select-none">
+        <div className="flex items-center gap-3">
+          <span className="w-8 h-8 rounded-lg bg-sky-600 flex items-center justify-center text-white text-sm font-black">G</span>
           <div>
-            <span className="text-sm font-black tracking-tight text-white">GlowDesk</span>
-            <span className="text-[8px] font-black text-cyan-400 block tracking-widest leading-none">BEAUTY CONTROL</span>
+            <span className="text-sm font-extrabold tracking-tight text-slate-900">GlowDesk</span>
+            <span className="text-[7px] font-black text-sky-600 block tracking-widest leading-none">BEAUTY CONTROL</span>
           </div>
         </div>
 
-        <p className="text-center md:text-right">
-          © 2026 GlowDesk. Todos los derechos reservados. Desarrollado con los más altos estándares de diseño digital corporativo.
+        <p className="text-center md:text-right font-medium">
+          © 2026 GlowDesk. Todos los derechos reservados. Desarrollado bajo los más altos estándares corporativos y de conversión digital.
         </p>
       </footer>
     </div>
