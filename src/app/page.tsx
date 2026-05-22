@@ -47,6 +47,7 @@ export default function LandingPage() {
 
   // Estado para modo claro/oscuro
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [showCompareTable, setShowCompareTable] = useState(false);
 
   // Sincronizar el tema inicial desde document.documentElement
   useEffect(() => {
@@ -72,6 +73,14 @@ export default function LandingPage() {
       localStorage.setItem("theme", nextMode ? "dark" : "light");
       // Notificar a otros componentes que el tema cambió
       window.dispatchEvent(new Event("themeChanged"));
+    }
+  };
+
+  const handleSelectPlan = (planName: string) => {
+    setLeadForm(prev => ({ ...prev, plan_interes: planName }));
+    const element = document.getElementById("registro-prospecto");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -868,81 +877,259 @@ export default function LandingPage() {
       </section>
 
       {/* ========================================================
-          6. COMPARATIVA DE PLANES
+          6. COMPARATIVA DE PLANES (OPTIMIZADA)
           ======================================================== */}
       <section id="planes" className="bg-slate-50/50 dark:bg-[#1A1A1A]/30 py-24 border-b border-slate-200 dark:border-[#242424] relative transition-colors duration-200">
+        <div className="absolute top-[30%] left-[5%] w-[40%] h-[300px] rounded-full bg-[#D23369]/5 blur-[120px] pointer-events-none" />
+        
         <div className="max-w-7xl mx-auto px-6 relative z-10">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-[9px] font-black text-[#D23369] tracking-widest uppercase block mb-2 font-syne">Tabla Comparativa</span>
-            <h2 className="text-3xl font-extrabold text-slate-900 dark:text-[#F8FAFC] tracking-tight font-syne">
+            <span className="text-[9px] font-black text-[#D23369] tracking-widest uppercase block mb-2 font-syne">Precios Transparentes, Retorno Inmediato</span>
+            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 dark:text-[#F8FAFC] tracking-tight font-syne">
               Planes que escalan con el volumen de tu Spa
             </h2>
             <p className="text-slate-500 dark:text-slate-400 text-xs md:text-sm mt-3 font-medium">
-              Elige el plan adaptado al volumen actual de tu negocio y actualiza o degrada tu cuenta cuando lo requieras.
+              Elige el plan adaptado al volumen actual de tu negocio y reclama tus 30 días de prueba gratis. Sin contratos ocultos ni cargos sorpresa.
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto bg-white border border-slate-200 dark:bg-[#1A1A1A] dark:border-[#242424] rounded-2xl shadow-xl overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="border-b border-slate-200 dark:border-[#242424]">
-                    <th className="px-6 py-4 bg-slate-100 dark:bg-[#161616] text-left text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest font-syne border-b border-slate-200 dark:border-[#242424]">Características</th>
-                    <th className="px-6 py-4 bg-slate-100 dark:bg-[#161616] text-center border-b border-slate-200 dark:border-[#242424]">
-                      <span className="text-[10px] font-black text-slate-800 dark:text-[#F8FAFC] block font-syne">Plan Inicial</span>
-                      <span className="text-[8px] font-bold text-slate-450 block font-syne">$29 / mes</span>
-                    </th>
-                    <th className="px-6 py-4 bg-[#D23369]/5 text-center relative border-b border-slate-200 dark:border-[#242424]">
-                      <span className="absolute top-1.5 left-1/2 -translate-x-1/2 bg-[#D23369] text-white text-[6px] font-black tracking-widest px-2 py-0.5 rounded uppercase font-syne">RECOMENDADO</span>
-                      <span className="text-[10px] font-black text-slate-800 dark:text-[#F8FAFC] block mt-1.5 font-syne">Plan Pro</span>
-                      <span className="text-[8px] font-bold text-[#D23369] block font-syne">$49 / mes</span>
-                    </th>
-                    <th className="px-6 py-4 bg-slate-100 dark:bg-[#161616] text-center border-b border-slate-200 dark:border-[#242424]">
-                      <span className="text-[10px] font-black text-slate-800 dark:text-[#F8FAFC] block font-syne">Plan Élite</span>
-                      <span className="text-[8px] font-bold text-slate-450 block font-syne">$89 / mes</span>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-100 dark:divide-[#242424] text-xs">
-                  {/* Fila 1 */}
-                  <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
-                    <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-300">Control de Caja Blindada</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black">✓</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black bg-[#D23369]/5">✓</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black">✓</td>
-                  </tr>
-                  {/* Fila 2 */}
-                  <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
-                    <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-300">Cálculo de Comisiones Estilistas</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black">✓</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black bg-[#D23369]/5">✓</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black">✓</td>
-                  </tr>
-                  {/* Fila 3 */}
-                  <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
-                    <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-300">WhatsApp Emisor Propio (API)</td>
-                    <td className="px-6 py-4 text-center text-red-500 font-bold">🔒 Plan Pro+</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black bg-[#D23369]/5">✓ (Línea Propia)</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black">✓ (Línea Propia)</td>
-                  </tr>
-                  {/* Fila 4 */}
-                  <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
-                    <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-300">Configuración Cromática Estética</td>
-                    <td className="px-6 py-4 text-center text-slate-400">Predeterminada</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black bg-[#D23369]/5">✓ (Código HSL)</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black">✓ (Código HSL)</td>
-                  </tr>
-                  {/* Fila 5 */}
-                  <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
-                    <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-300">Límite de Sedes/Locales</td>
-                    <td className="px-6 py-4 text-center text-slate-500 font-medium">1 Sede</td>
-                    <td className="px-6 py-4 text-center text-slate-500 font-medium bg-[#D23369]/5">2 Sedes</td>
-                    <td className="px-6 py-4 text-center text-[#10B981] font-black">Sedes Ilimitadas</td>
-                  </tr>
-                </tbody>
-              </table>
+          {/* Grilla de Tarjetas de Precios Premium */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto mb-16 items-stretch">
+            
+            {/* Plan Inicial */}
+            <div className="card-glow-premium rounded-3xl bg-white dark:bg-[#1A1A1A] border border-slate-200 dark:border-[#242424] p-8 flex flex-col justify-between shadow-sm relative overflow-hidden transition-premium">
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <span className="px-2.5 py-0.5 rounded bg-slate-100 dark:bg-[#242424] text-slate-600 dark:text-slate-400 text-[8px] font-black uppercase tracking-wider font-syne">NEGOCIO LOCAL</span>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-[#F8FAFC] mt-2 font-syne">Plan Inicial</h3>
+                  </div>
+                  <Lock size={18} className="text-slate-400" />
+                </div>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium mb-6">
+                  Para centros de belleza individuales que buscan automatizar la caja chica y comisiones de estilistas de forma segura.
+                </p>
+                <div className="flex items-baseline gap-1 mb-8">
+                  <span className="text-4xl font-black text-slate-900 dark:text-white font-syne">$29</span>
+                  <span className="text-slate-400 text-[9px] font-bold">/ mes</span>
+                </div>
+                <div className="space-y-3.5 mb-8">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[9px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                    <span className="text-[11px] font-extrabold text-slate-700 dark:text-slate-350">Control de Caja Blindada</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[9px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                    <span className="text-[11px] font-extrabold text-slate-700 dark:text-slate-350">Cálculo de Comisiones Estilistas</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[9px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                    <span className="text-[11px] font-extrabold text-slate-700 dark:text-slate-350">Límite de 1 Sede (Local único)</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 text-slate-400">
+                    <span className="text-[9px] font-bold select-none ml-1">🔒</span>
+                    <span className="text-[11px] font-medium line-through">Personalización con HSL</span>
+                  </div>
+                  <div className="flex items-center gap-2.5 text-slate-400">
+                    <span className="text-[9px] font-bold select-none ml-1">🔒</span>
+                    <span className="text-[11px] font-medium line-through">Recordatorios WhatsApp Pro</span>
+                  </div>
+                </div>
+              </div>
+              <button 
+                onClick={() => handleSelectPlan("Plan Inicial")}
+                className="w-full text-center py-3.5 rounded-xl border border-slate-200 dark:border-[#2D2D2D] text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-[#121212]/50 hover:bg-slate-100 dark:hover:bg-[#242424] hover:text-slate-900 dark:hover:text-white transition-all text-[10px] font-extrabold uppercase tracking-widest font-syne hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              >
+                Elegir Plan Inicial
+              </button>
+            </div>
+
+            {/* Plan Pro - RECOMENDADO VIP (CON MOTION GRAPHICS) */}
+            <div className="rounded-3xl bg-gradient-to-b from-white to-slate-50/50 dark:from-[#1E1A1D] dark:to-[#121212] border-2 border-[#D23369] p-8 flex flex-col justify-between shadow-[0_15px_35px_rgba(210,51,105,0.15)] dark:shadow-[0_15px_35px_rgba(210,51,105,0.25)] relative overflow-hidden transition-premium hover:scale-[1.03] animate-float-vip">
+              <span className="absolute top-3 right-3 bg-[#D23369] text-white text-[7px] font-black tracking-widest px-3 py-1 rounded-full uppercase font-syne animate-glow-highlight">VIP RECOMENDADO</span>
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <span className="px-2.5 py-0.5 rounded bg-[#D23369]/10 text-[#D23369] text-[8px] font-black uppercase tracking-wider font-syne">CRECIMIENTO ACELERADO</span>
+                    <h3 className="text-xl font-black text-slate-900 dark:text-[#F8FAFC] mt-2 font-syne">Plan Pro</h3>
+                  </div>
+                  <Sparkles size={20} className="text-[#D23369] animate-pulse" />
+                </div>
+                <p className="text-[11px] text-slate-600 dark:text-slate-300 leading-relaxed font-semibold mb-6">
+                  Ideal para Spas de alta gama que necesitan recordatorios automáticos desde su propio número y tematización estética.
+                </p>
+                <div className="flex items-baseline gap-1 mb-8">
+                  <span className="text-5xl font-black text-[#D23369] font-syne">$49</span>
+                  <span className="text-[#D23369] text-[10px] font-bold">/ mes</span>
+                </div>
+                <div className="space-y-3.5 mb-8">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/20 text-[#D23369] flex items-center justify-center text-[9px] font-black border border-[#D23369]/30 font-syne">✓</span>
+                    <span className="text-[11.5px] font-black text-slate-800 dark:text-[#F8FAFC]">Todo lo del Plan Inicial</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/20 text-[#D23369] flex items-center justify-center text-[9px] font-black border border-[#D23369]/30 font-syne">✓</span>
+                    <span className="text-[11.5px] font-black text-slate-800 dark:text-[#F8FAFC]">WhatsApp Emisor Propio (API)</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/20 text-[#D23369] flex items-center justify-center text-[9px] font-black border border-[#D23369]/30 font-syne">✓</span>
+                    <span className="text-[11.5px] font-black text-slate-800 dark:text-[#F8FAFC]">Recordatorio Automático de Citas</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/20 text-[#D23369] flex items-center justify-center text-[9px] font-black border border-[#D23369]/30 font-syne">✓</span>
+                    <span className="text-[11.5px] font-black text-slate-800 dark:text-[#F8FAFC]">Configuración Cromática HSL</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/20 text-[#D23369] flex items-center justify-center text-[9px] font-black border border-[#D23369]/30 font-syne">✓</span>
+                    <span className="text-[11.5px] font-black text-slate-800 dark:text-[#F8FAFC]">Límite Expandido a 2 Sedes</span>
+                  </div>
+                </div>
+              </div>
+              <button 
+                onClick={() => handleSelectPlan("Plan Pro")}
+                className="w-full text-center py-4 rounded-xl bg-[#D23369] hover:bg-[#C70039] text-white text-[10px] font-black uppercase tracking-widest font-syne transition-all shadow-md shadow-[#D23369]/25 hover:scale-[1.03] active:scale-[0.97] border-none cursor-pointer"
+              >
+                Reclamar 30 Días Gratis Pro
+              </button>
+            </div>
+
+            {/* Plan Élite */}
+            <div className="card-glow-premium rounded-3xl bg-white dark:bg-[#1A1A1A] border border-slate-200 dark:border-[#242424] p-8 flex flex-col justify-between shadow-sm relative overflow-hidden transition-premium">
+              <div>
+                <div className="flex justify-between items-start mb-6">
+                  <div>
+                    <span className="px-2.5 py-0.5 rounded bg-slate-100 dark:bg-[#242424] text-slate-600 dark:text-slate-400 text-[8px] font-black uppercase tracking-wider font-syne">MULTISEDE EMBAJADOR</span>
+                    <h3 className="text-xl font-bold text-slate-900 dark:text-[#F8FAFC] mt-2 font-syne">Plan Élite</h3>
+                  </div>
+                  <Shield size={18} className="text-[#D23369]" />
+                </div>
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed font-medium mb-6">
+                  Para redes corporativas y cadenas estéticas consolidadas con múltiples locales y requerimientos de soporte prioritario.
+                </p>
+                <div className="flex items-baseline gap-1 mb-8">
+                  <span className="text-4xl font-black text-slate-900 dark:text-white font-syne">$89</span>
+                  <span className="text-slate-400 text-[9px] font-bold">/ mes</span>
+                </div>
+                <div className="space-y-3.5 mb-8">
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[9px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                    <span className="text-[11px] font-extrabold text-slate-700 dark:text-slate-350">Sedes e Inventarios Ilimitados</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[9px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                    <span className="text-[11px] font-extrabold text-slate-700 dark:text-slate-350">Reportes Financieros Consolidados</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[9px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                    <span className="text-[11px] font-extrabold text-slate-700 dark:text-slate-350">Asistencia prioritaria & Migración</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[9px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                    <span className="text-[11px] font-extrabold text-slate-700 dark:text-slate-350">WhatsApp Emisor Propio Incluido</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <span className="w-4.5 h-4.5 rounded bg-[#D23369]/10 text-[#D23369] flex items-center justify-center text-[9px] font-bold border border-[#D23369]/20 font-syne">✓</span>
+                    <span className="text-[11px] font-extrabold text-slate-700 dark:text-slate-350">Soporte VIP Telefónico 24/7</span>
+                  </div>
+                </div>
+              </div>
+              <button 
+                onClick={() => handleSelectPlan("Plan Elite")}
+                className="w-full text-center py-3.5 rounded-xl border border-slate-200 dark:border-[#2D2D2D] text-slate-700 dark:text-slate-300 bg-slate-50 dark:bg-[#121212]/50 hover:bg-slate-100 dark:hover:bg-[#242424] hover:text-slate-900 dark:hover:text-white transition-all text-[10px] font-extrabold uppercase tracking-widest font-syne hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
+              >
+                Elegir Plan Élite
+              </button>
             </div>
           </div>
+
+          {/* Toggle Expandir Comparativa Técnica */}
+          <div className="text-center">
+            <button 
+              onClick={() => setShowCompareTable(!showCompareTable)}
+              className="inline-flex items-center gap-2 px-6 py-3.5 bg-white dark:bg-[#1A1A1A] border border-slate-200 dark:border-[#242424] hover:border-slate-300 dark:hover:border-[#2D2D2D] text-slate-650 dark:text-slate-350 hover:text-slate-900 dark:hover:text-white text-[9px] font-black uppercase tracking-widest font-syne transition-premium hover:scale-[1.02] active:scale-[0.98] cursor-pointer border-solid rounded-xl"
+            >
+              {showCompareTable ? "Ocultar Tabla Técnica" : "Comparar Características Técnicas Completas"}
+              <span className={`transition-transform duration-300 text-[10px] ${showCompareTable ? 'rotate-180' : 'rotate-0'}`}>▼</span>
+            </button>
+          </div>
+
+          {/* Tabla Comparativa Técnica (Toglable) */}
+          {showCompareTable && (
+            <div className="max-w-5xl mx-auto mt-12 bg-white border border-slate-200 dark:bg-[#1A1A1A] dark:border-[#242424] rounded-2xl shadow-xl overflow-hidden animate-in fade-in slide-in-from-top-6 duration-400">
+              <div className="overflow-x-auto">
+                <table className="w-full border-collapse">
+                  <thead>
+                    <tr className="border-b border-slate-200 dark:border-[#242424]">
+                      <th className="px-6 py-4 bg-slate-100 dark:bg-[#161616] text-left text-[9px] font-black text-slate-500 dark:text-slate-400 uppercase tracking-widest font-syne border-b border-slate-200 dark:border-[#242424]">Características</th>
+                      <th className="px-6 py-4 bg-slate-100 dark:bg-[#161616] text-center border-b border-slate-200 dark:border-[#242424]">
+                        <span className="text-[10px] font-black text-slate-800 dark:text-[#F8FAFC] block font-syne">Plan Inicial</span>
+                        <span className="text-[8px] font-bold text-slate-450 block font-syne">$29 / mes</span>
+                      </th>
+                      <th className="px-6 py-4 bg-[#D23369]/5 text-center relative border-b border-slate-200 dark:border-[#242424]">
+                        <span className="text-[10px] font-black text-slate-800 dark:text-[#F8FAFC] block font-syne">Plan Pro</span>
+                        <span className="text-[8px] font-bold text-[#D23369] block font-syne">$49 / mes</span>
+                      </th>
+                      <th className="px-6 py-4 bg-slate-100 dark:bg-[#161616] text-center border-b border-slate-200 dark:border-[#242424]">
+                        <span className="text-[10px] font-black text-slate-800 dark:text-[#F8FAFC] block font-syne">Plan Élite</span>
+                        <span className="text-[8px] font-bold text-slate-450 block font-syne">$89 / mes</span>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100 dark:divide-[#242424] text-xs">
+                    {/* Fila 1 */}
+                    <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
+                      <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-350">Control de Caja Blindada</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black">✓</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black bg-[#D23369]/5">✓</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black">✓</td>
+                    </tr>
+                    {/* Fila 2 */}
+                    <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
+                      <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-350">Cálculo de Comisiones Estilistas</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black">✓</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black bg-[#D23369]/5">✓</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black">✓</td>
+                    </tr>
+                    {/* Fila 3 */}
+                    <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
+                      <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-350">WhatsApp Emisor Propio (API)</td>
+                      <td className="px-6 py-4 text-center text-red-500 font-bold">🔒 Plan Pro+</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black bg-[#D23369]/5">✓ (Línea Propia)</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black">✓ (Línea Propia)</td>
+                    </tr>
+                    {/* Fila 4 */}
+                    <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
+                      <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-350">Configuración Cromática Estética</td>
+                      <td className="px-6 py-4 text-center text-slate-400">Predeterminada</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black bg-[#D23369]/5">✓ (Código HSL)</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black">✓ (Código HSL)</td>
+                    </tr>
+                    {/* Fila 5 */}
+                    <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
+                      <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-350">Límite de Sedes/Locales</td>
+                      <td className="px-6 py-4 text-center text-slate-500 font-medium">1 Sede</td>
+                      <td className="px-6 py-4 text-center text-slate-500 font-medium bg-[#D23369]/5">2 Sedes</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black">Sedes Ilimitadas</td>
+                    </tr>
+                    {/* Fila 6 */}
+                    <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
+                      <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-350">Reportes Financieros Consolidados</td>
+                      <td className="px-6 py-4 text-center text-slate-400">No disponible</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black bg-[#D23369]/5">Básicos</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black">Avanzados (Multisede)</td>
+                    </tr>
+                    {/* Fila 7 */}
+                    <tr className="border-b border-slate-150 dark:border-[#242424] hover:bg-slate-50 dark:hover:bg-[#242424] transition-colors">
+                      <td className="px-6 py-4 font-bold text-slate-800 dark:text-slate-350">Soporte y Acompañamiento</td>
+                      <td className="px-6 py-4 text-center text-slate-500 font-medium">Por correo</td>
+                      <td className="px-6 py-4 text-center text-slate-500 font-medium bg-[#D23369]/5">Prioritario</td>
+                      <td className="px-6 py-4 text-center text-[#10B981] font-black">VIP Telefónico 24/7</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
