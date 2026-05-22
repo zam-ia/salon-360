@@ -15,6 +15,7 @@ CREATE TABLE public.salones (
     plan_monto NUMERIC(10, 2) DEFAULT 79.00,
     plan_vence DATE DEFAULT (CURRENT_DATE + INTERVAL '30 days'),
     plan_estado TEXT DEFAULT 'Activo' CHECK (plan_estado IN ('Activo', 'Vencido', 'Prueba', 'Inactivo')),
+    color_corporativo TEXT DEFAULT '#ec4899',
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 

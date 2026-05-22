@@ -19,6 +19,7 @@ import { registrarIngreso, obtenerIngresosMes } from "@/app/actions/ingresos";
 import { obtenerClientes, registrarCliente } from "@/app/actions/clientes";
 import { obtenerServicios, registrarServicio } from "@/app/actions/servicios";
 import { obtenerPersonal } from "@/app/actions/personal";
+import { obtenerSalon } from "@/app/actions/salon";
 
 interface Cliente {
   id: string;
@@ -66,6 +67,16 @@ export default function IngresosPage() {
   const [servicios, setServicios] = useState<Servicio[]>([]);
   const [personal, setPersonal] = useState<Colaborador[]>([]);
   const [ingresos, setIngresos] = useState<Ingreso[]>([]);
+  const [salonPlan, setSalonPlan] = useState("Plan Inicial");
+  const [whatsappEmisor, setWhatsappEmisor] = useState("");
+  const [whatsappNotification, setWhatsappNotification] = useState<{
+    show: boolean;
+    clienteNombre: string;
+    telefono: string;
+    mensaje: string;
+    plan: string;
+    status: 'enviado' | 'bloqueado';
+  } | null>(null);
 
   // Estado del formulario
   const [formData, setFormData] = useState({
@@ -121,17 +132,24 @@ export default function IngresosPage() {
   const cargarDatos = async () => {
     setLoadingOptions(true);
     try {
-      const [resClientes, resServicios, resPersonal, resIngresos] = await Promise.all([
+      const [resClientes, resServicios, resPersonal, resIngresos, resSalon] = await Promise.all([
         obtenerClientes(),
         obtenerServicios(),
         obtenerPersonal(),
-        obtenerIngresosMes()
+        obtenerIngresosMes(),
+        obtenerSalon()
       ]);
 
       if (resClientes.success) setClientes(resClientes.clientes || []);
       if (resServicios.success) setServicios(resServicios.servicios || []);
       if (resPersonal.success) setPersonal(resPersonal.personal || []);
       if (resIngresos.success) setIngresos(resIngresos.ingresos as Ingreso[] || []);
+      if (resSalon?.success && resSalon.salon) {
+        setSalonPlan(resSalon.salon.plan || "Plan Inicial");
+      }
+      if (typeof window !== "undefined") {
+        setWhatsappEmisor(localStorage.getItem("whatsappEmisor") || "");
+      }
     } catch (e) {
       console.error("Error cargando opciones para ingresos:", e);
     } finally {
@@ -235,6 +253,44 @@ export default function IngresosPage() {
         setStatus(`Error: ${res.error}`);
       } else {
         setStatus("¡Ingreso guardado exitosamente!");
+
+        // SIMULACIÓN DE WHATSAPP AUTOMÁTICO
+        const selectedClient = clientes.find(c => c.id === formData.cliente_id);
+        const selectedServicio = servicios.find(s => s.id === formData.servicio_id);
+        if (selectedClient) {
+          const isPlanHabilitado = salonPlan === "Plan Pro" || salonPlan === "Plan Élite";
+          const tel = selectedClient.telefono || "Sin teléfono";
+          const nom = `${selectedClient.nombre} ${selectedClient.apellidos || ''}`.trim();
+          const servNom = selectedServicio?.nombre || "Servicio Agendado";
+          
+          let msgText = "";
+          if (isPlanHabilitado) {
+            msgText = `¡Hola ${selectedClient.nombre}! Confirmamos tu cita para ${servNom} el ${formData.fecha}. ¡Te esperamos con ansias!`;
+            setWhatsappNotification({
+              show: true,
+              clienteNombre: nom,
+              telefono: tel,
+              mensaje: msgText,
+              plan: salonPlan,
+              status: 'enviado'
+            });
+          } else {
+            setWhatsappNotification({
+              show: true,
+              clienteNombre: nom,
+              telefono: tel,
+              mensaje: "El envío automático de recordatorios por WhatsApp está deshabilitado en el Plan Inicial comercial.",
+              plan: salonPlan,
+              status: 'bloqueado'
+            });
+          }
+
+          // Auto-ocultar notificación tras 7 segundos
+          setTimeout(() => {
+            setWhatsappNotification(prev => prev ? { ...prev, show: false } : null);
+          }, 7000);
+        }
+
         // Limpiar formulario parcialmente
         setFormData(prev => ({
           ...prev,
@@ -1079,6 +1135,70 @@ export default function IngresosPage() {
               </div>
             </form>
           </div>
+        </div>
+      )}
+
+      {/* NOTIFICACIÓN FLOTANTE WHATSAPP SIMULADO */}
+      {whatsappNotification && whatsappNotification.show && (
+        <div className="fixed bottom-6 right-6 z-50 max-w-sm w-full bg-white/95 backdrop-blur-md rounded-3xl border border-emerald-100 shadow-2xl p-5 animate-in slide-in-from-bottom-5 slide-in-from-right-5 duration-350 flex flex-col gap-3">
+          
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="w-8 h-8 rounded-xl bg-emerald-500 text-white flex items-center justify-center text-xs font-black shadow-md shadow-emerald-200">
+                💬
+              </span>
+              <div>
+                <span className="text-[10px] font-black text-emerald-600 tracking-widest block">WhatsApp Automático</span>
+                <span className="text-xs font-black text-gray-800 tracking-tight">
+                  {whatsappNotification.status === 'enviado' ? "¡Recordatorio Enviado!" : "Acción Bloqueada"}
+                </span>
+              </div>
+            </div>
+            <button 
+              onClick={() => setWhatsappNotification(prev => prev ? { ...prev, show: false } : null)}
+              className="text-gray-400 hover:text-gray-600 text-xs p-1"
+            >
+              ✕
+            </button>
+          </div>
+
+          <div className="p-3.5 bg-emerald-50/40 rounded-2xl border border-emerald-100/50 flex flex-col gap-2">
+            <div className="flex flex-col gap-1 text-[9px] font-bold text-gray-400 border-b border-emerald-150 pb-1.5 mb-0.5">
+              <div className="flex justify-between items-center">
+                <span>Cliente: {whatsappNotification.clienteNombre}</span>
+                <span>Tel: {whatsappNotification.telefono}</span>
+              </div>
+              {whatsappNotification.status === 'enviado' && (
+                <span className="text-emerald-700 block mt-0.5">
+                  Línea Emisor: {whatsappEmisor || "GlowDesk Gateway (Canal de Prueba)"}
+                </span>
+              )}
+            </div>
+            <p className="text-[10px] font-medium text-gray-600 leading-relaxed">
+              {whatsappNotification.mensaje}
+            </p>
+          </div>
+
+          <div className="flex items-center justify-between text-[8px] font-bold">
+            <span className="text-gray-400 flex items-center gap-1">
+              Plan del Salón: {whatsappNotification.plan}
+            </span>
+            {whatsappNotification.status === 'enviado' ? (
+              <span className="text-emerald-600 flex items-center gap-1">
+                ✓✓ Entregado al instante
+              </span>
+            ) : (
+              <button 
+                onClick={() => {
+                  window.location.href = "/dashboard/configuracion";
+                }}
+                className="text-pink-500 hover:text-pink-600 cursor-pointer underline border-none bg-transparent outline-none font-bold"
+              >
+                Mejorar Plan 🚀
+              </button>
+            )}
+          </div>
+
         </div>
       )}
 
